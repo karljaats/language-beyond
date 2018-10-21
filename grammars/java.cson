@@ -1,0 +1,1376 @@
+'scopeName': 'source.beyond'
+'name': 'Beyond'
+'fileTypes': [
+  'beyond'
+]
+'patterns': [
+  {
+    'begin': '\\b(package)\\b\\s*'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.other.package.beyond'
+    'end': '\\s*(;)'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.terminator.beyond'
+    'name': 'meta.package.beyond'
+    'contentName': 'storage.modifier.package.beyond'
+    'patterns': [
+      {
+        'include': '#comments'
+      }
+      {
+        'match': '(?<=\\.)\\s*\\.|\\.(?=\\s*;)'
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+'
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '[A-Z]+'
+        'name': 'invalid.deprecated.package_name_not_lowercase.beyond'
+      }
+      {
+        # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+        'match': '''(?x)\\b(?<!\\$)
+                    (abstract|assert|boolean|break|byte|case|catch|char|class|
+                    const|continue|default|do|double|else|enum|extends|final|
+                    finally|float|for|goto|if|implements|import|instanceof|int|
+                    interface|long|native|new|package|private|protected|public|
+                    return|short|static|strictfp|super|switch|syncronized|this|
+                    throw|throws|transient|try|void|volatile|while|
+                    true|false|null)\\b
+                  '''
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '\\.'
+        'name': 'punctuation.separator.beyond'
+      }
+    ]
+  }
+  {
+    'begin': '\\b(import)\\b\\s*\\b(static)?\\b\\s'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.other.import.beyond'
+      '2':
+        'name': 'storage.modifier.beyond'
+    'end': '\\s*(;)'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.terminator.beyond'
+    'name': 'meta.import.beyond'
+    'contentName': 'storage.modifier.import.beyond'
+    'patterns': [
+      {
+        'include': '#comments'
+      }
+      {
+        'match': '(?<=\\.)\\s*\\.|\\.(?=\\s*;)'
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '(?<!\\.)\\s*\\*'
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+'
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+        'match': '''(?x)\\b(?<!\\$)
+                    (abstract|assert|boolean|break|byte|case|catch|char|class|
+                    const|continue|default|do|double|else|enum|extends|final|
+                    finally|float|for|goto|if|implements|import|instanceof|int|
+                    interface|long|native|new|package|private|protected|public|
+                    return|short|static|strictfp|super|switch|syncronized|this|
+                    throw|throws|transient|try|void|volatile|while|
+                    true|false|null)\\b
+                  '''
+        'name': 'invalid.illegal.character_not_allowed_here.beyond'
+      }
+      {
+        'match': '\\.'
+        'name': 'punctuation.separator.beyond'
+      }
+      {
+        'match': '\\*'
+        'name': 'variable.language.wildcard.beyond'
+      }
+    ]
+  }
+  {
+    'include': '#comments-javadoc'
+  }
+  {
+    'include': '#code'
+  }
+  {
+    'include': '#module'
+  }
+]
+'repository':
+  'all-types':
+    'patterns': [
+      {
+        'include': '#primitive-arrays'
+      }
+      {
+        'include': '#primitive-types'
+      }
+      {
+        'include': '#object-types'
+      }
+    ]
+  'annotations':
+    'patterns': [
+      {
+        'begin': '((@)[^\\s(]+)(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'storage.type.annotation.beyond'
+          '2':
+            'name': 'punctuation.definition.annotation.beyond'
+          '3':
+            'name': 'punctuation.definition.annotation-arguments.begin.bracket.round.beyond'
+        'end': '\\)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.annotation-arguments.end.bracket.round.beyond'
+        'name': 'meta.declaration.annotation.beyond'
+        'patterns': [
+          {
+            'captures':
+              '1':
+                'name': 'constant.other.key.beyond'
+              '2':
+                'name': 'keyword.operator.assignment.beyond'
+            'match': '(\\w*)\\s*(=)'
+          }
+          {
+            'include': '#code'
+          }
+        ]
+      }
+      {
+        'match': '(@)(interface)\\s+(\\w*)|((@)\\w*)'
+        'name': 'meta.declaration.annotation.beyond'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.annotation.beyond'
+          '2':
+            'name': 'storage.modifier.beyond'
+          '3':
+            'name': 'storage.type.annotation.beyond'
+          '4':
+            'name': 'storage.type.annotation.beyond'
+          '5':
+            'name': 'punctuation.definition.annotation.beyond'
+      }
+    ]
+  'anonymous-block-and-instance-initializer':
+    'begin': '{'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.block.begin.bracket.curly.beyond'
+    'end': '}'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.block.end.bracket.curly.beyond'
+    'patterns': [
+      {
+        'include': '#code'
+      }
+    ]
+  'anonymous-classes-and-new':
+    'begin': '\\bnew\\b'
+    'beginCaptures':
+      '0':
+        'name': 'keyword.control.new.beyond'
+    'end': '(?=;|\\)|,|:|}|\\+)'
+    'patterns': [
+      {
+        'include': '#comments'
+      }
+      {
+        'include': '#function-call'
+      }
+      {
+        'include': '#all-types'
+      }
+      {
+        'begin': '(?<!\\])\\s*({)' # Don't match new int[]{1, 2, 3};
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.section.inner-class.begin.bracket.curly.beyond'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.inner-class.end.bracket.curly.beyond'
+        'name': 'meta.inner-class.beyond'
+        'patterns': [
+          {
+            'include': '#class-body'
+          }
+        ]
+      }
+      {
+        'include': '#parens'
+      }
+    ]
+  'assertions':
+    'patterns': [
+      {
+        'begin': '\\b(assert)\\s'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.control.assert.beyond'
+        'end': '$'
+        'name': 'meta.declaration.assertion.beyond'
+        'patterns': [
+          {
+            'match': ':'
+            'name': 'keyword.operator.assert.expression-separator.beyond'
+          }
+          {
+            'include': '#code'
+          }
+        ]
+      }
+    ]
+  'class':
+    'begin': '(?=\\w?[\\w\\s]*(?:class|(?<!@)interface|enum)\\s+\\w+)'
+    'end': '}'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.class.end.bracket.curly.beyond'
+    'name': 'meta.class.beyond'
+    'patterns': [
+      {
+        'include': '#storage-modifiers'
+      }
+      {
+        'include': '#generics'
+      }
+      {
+        'include': '#comments'
+      }
+      {
+        'captures':
+          '1':
+            'name': 'storage.modifier.beyond'
+          '2':
+            'name': 'entity.name.type.class.beyond'
+        'match': '(class|(?<!@)interface|enum)\\s+(\\w+)'
+        'name': 'meta.class.identifier.beyond'
+      }
+      {
+        'begin': 'extends'
+        'beginCaptures':
+          '0':
+            'name': 'storage.modifier.extends.beyond'
+        'end': '(?={|implements)'
+        'name': 'meta.definition.class.inherited.classes.beyond'
+        'patterns': [
+          {
+            'include': '#object-types-inherited'
+          }
+          {
+            'include': '#comments'
+          }
+        ]
+      }
+      {
+        'begin': '(implements)\\s'
+        'beginCaptures':
+          '1':
+            'name': 'storage.modifier.implements.beyond'
+        'end': '(?=\\s*extends|\\{)'
+        'name': 'meta.definition.class.implemented.interfaces.beyond'
+        'patterns': [
+          {
+            'include': '#object-types-inherited'
+          }
+          {
+            'include': '#comments'
+          }
+        ]
+      }
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.class.begin.bracket.curly.beyond'
+        'end': '(?=})'
+        'contentName': 'meta.class.body.beyond'
+        'patterns': [
+          {
+            'include': '#class-body'
+          }
+        ]
+      }
+    ]
+  'class-body':
+    'patterns': [
+      {
+        'include': '#comments-javadoc'
+      }
+      {
+        'include': '#comments'
+      }
+      {
+        'include': '#enums'
+      }
+      {
+        'include': '#class'
+      }
+      {
+        'include': '#generics'
+      }
+      {
+        'include': '#static-initializer'
+      }
+      {
+        'include': '#methods'
+      }
+      {
+        'include': '#annotations'
+      }
+      {
+        'include': '#member-variables'
+      }
+      {
+        'include': '#storage-modifiers'
+      }
+      {
+        'include': '#code'
+      }
+    ]
+  'code':
+    'patterns': [
+      {
+        'include': '#annotations'
+      }
+      {
+        'include': '#comments'
+      }
+      {
+        'include': '#enums'
+      }
+      {
+        'include': '#class'
+      }
+      {
+        'include': '#anonymous-block-and-instance-initializer'
+      }
+      {
+        'include': '#try-catch-finally'
+      }
+      {
+        'include': '#assertions'
+      }
+      {
+        'include': '#parens'
+      }
+      {
+        'include': '#constants-and-special-vars'
+      }
+      {
+        'include': '#numbers'
+      }
+      {
+        'include': '#anonymous-classes-and-new'
+      }
+      {
+        'include': '#lambda-expression'
+      }
+      {
+        'include': '#keywords'
+      }
+      {
+        'include': '#storage-modifiers'
+      }
+      {
+        'include': '#method-call'
+      }
+      {
+        'include': '#function-call'
+      }
+      {
+        'include': '#variables'
+      }
+      {
+        'include': '#objects'
+      }
+      {
+        'include': '#properties'
+      }
+      {
+        'include': '#strings'
+      }
+      {
+        'include': '#all-types'
+      }
+      {
+        'match': ','
+        'name': 'punctuation.separator.delimiter.beyond'
+      }
+      {
+        'match': '\\.'
+        'name': 'punctuation.separator.period.beyond'
+      }
+      {
+        'match': ';'
+        'name': 'punctuation.terminator.beyond'
+      }
+    ]
+  'comments':
+    'patterns': [
+      {
+        'captures':
+          '0':
+            'name': 'punctuation.definition.comment.beyond'
+        'match': '/\\*\\*/'
+        'name': 'comment.block.empty.beyond'
+      }
+      {
+        'include': 'text.html.javadoc'
+      }
+      {
+        'include': '#comments-inline'
+      }
+    ]
+  'comments-inline':
+    'patterns': [
+      {
+        'begin': '/\\*'
+        'captures':
+          '0':
+            'name': 'punctuation.definition.comment.beyond'
+        'end': '\\*/'
+        'name': 'comment.block.beyond'
+      }
+      {
+        'begin': '(^[ \\t]+)?(?=//)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.whitespace.comment.leading.beyond'
+        'end': '(?!\\G)'
+        'patterns': [
+          {
+            'begin': '//'
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.definition.comment.beyond'
+            'end': '\\n'
+            'name': 'comment.line.double-slash.beyond'
+          }
+        ]
+      }
+    ]
+  'comments-javadoc':
+    'patterns': [
+      'begin': '^\\s*(/\\*\\*)(?!/)'
+      'beginCaptures':
+        '1':
+          'name': 'punctuation.definition.comment.beyond'
+      'end': '\\*/'
+      'endCaptures':
+        '0':
+          'name': 'punctuation.definition.comment.beyond'
+      'name': 'comment.block.javadoc.beyond'
+      'patterns': [
+        {
+          'match': '@(author|deprecated|return|see|serial|since|version)\\b'
+          'name': 'keyword.other.documentation.javadoc.beyond'
+        }
+        {
+          'match': '(@param)\\s+(\\S+)'
+          'captures':
+            '1':
+              'name': 'keyword.other.documentation.javadoc.beyond'
+            '2':
+              'name': 'variable.parameter.beyond'
+        }
+        {
+          'match': '(@(?:exception|throws))\\s+(\\S+)'
+          'captures':
+            '1':
+              'name': 'keyword.other.documentation.javadoc.beyond'
+            '2':
+              'name': 'entity.name.type.class.beyond'
+        }
+        {
+          'match': '{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*}'
+          'captures':
+            '1':
+              'name': 'keyword.other.documentation.javadoc.beyond'
+            '2':
+              'name': 'entity.name.type.class.beyond'
+            '3':
+              'name': 'variable.parameter.beyond'
+        }
+      ]
+    ]
+  'constants-and-special-vars':
+    'patterns': [
+      {
+        'match': '\\b(true|false|null)\\b'
+        'name': 'constant.language.beyond'
+      }
+      {
+        'match': '\\bthis\\b'
+        'name': 'variable.language.this.beyond'
+      }
+      {
+        'match': '\\bsuper\\b'
+        'name': 'variable.language.beyond'
+      }
+    ]
+  'enums':
+    'begin': '^\\s*([\\w\\s]*)(enum)\\s+(\\w+)'
+    'beginCaptures':
+      '1':
+        'patterns': [
+          {
+            'include': '#storage-modifiers'
+          }
+        ]
+      '2':
+        'name': 'storage.modifier.beyond'
+      '3':
+        'name': 'entity.name.type.enum.beyond'
+    'end': '}'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.enum.end.bracket.curly.beyond'
+    'name': 'meta.enum.beyond'
+    'patterns': [
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.enum.begin.bracket.curly.beyond'
+        'end': '(?=})'
+        'patterns': [
+          {
+            'begin': '(?<={)'
+            'end': '(?=;|})'
+            'patterns': [
+              {
+                'include': '#comments-javadoc'
+              }
+              {
+                'include': '#comments'
+              }
+              # Represents enum's constant field with constructor, e.g. `Test(123)`
+              {
+                'begin': '(\\w+)\\s*(\\()'
+                'beginCaptures':
+                  '1':
+                    'name': 'constant.other.enum.beyond'
+                  '2':
+                    'name': 'punctuation.bracket.round.beyond'
+                'end': '\\)'
+                'endCaptures':
+                  '0':
+                    'name': 'punctuation.bracket.round.beyond'
+                'patterns': [
+                  {
+                    'include': '#code'
+                  }
+                ]
+              }
+              # Represents enum's constant field, e.g. `Test`
+              {
+                'match': '\\b\\w+\\b'
+                'name': 'constant.other.enum.beyond'
+              }
+            ]
+          }
+          {
+            'include': '#class-body'
+          }
+        ]
+      }
+    ]
+  'function-call':
+    'begin': '([A-Za-z_$][\\w$]*)\\s*(\\()'
+    'beginCaptures':
+      '1':
+        'name': 'entity.name.function.beyond'
+      '2':
+        'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
+    'end': '\\)'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.parameters.end.bracket.round.beyond'
+    'name': 'meta.function-call.beyond'
+    'patterns': [
+      {
+        'include': '#code'
+      }
+    ]
+  'generics':
+    'begin': '<'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.bracket.angle.beyond'
+    'end': '>'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.bracket.angle.beyond'
+    'patterns': [
+      {
+        'match': '\\b(extends|super)\\b'
+        'name': 'storage.modifier.$1.beyond'
+      }
+      {
+        'match': '(?<!\\.)([a-zA-Z$_][a-zA-Z0-9$_]*)(?=\\s*<)'
+        'captures':
+          '1':
+            'name': 'storage.type.beyond'
+      }
+      {
+        'include': '#primitive-arrays'
+      }
+      {
+        'match': '[a-zA-Z$_][a-zA-Z0-9$_]*'
+        'name': 'storage.type.generic.beyond'
+      }
+      {
+        'match': '\\?'
+        'name': 'storage.type.generic.wildcard.beyond'
+      }
+      {
+        'match': '&'
+        'name': 'punctuation.separator.types.beyond'
+      }
+      {
+        'match': ','
+        'name': 'punctuation.separator.delimiter.beyond'
+      }
+      {
+        'match': '\\.'
+        'name': 'punctuation.separator.period.beyond'
+      }
+      {
+        'include': '#parens'
+      }
+      {
+        'include': '#generics'
+      }
+      {
+        'include': '#comments'
+      }
+    ]
+  'keywords':
+    'patterns': [
+      {
+        'match': '\\bthrow\\b'
+        'name': 'keyword.control.throw.beyond'
+      }
+      {
+        'match': '\\?|:'
+        'name': 'keyword.control.ternary.beyond'
+      }
+      {
+        'match': '\\b(return|break|case|continue|default|do|while|for|switch|if|else)\\b'
+        'name': 'keyword.control.beyond'
+      }
+      {
+        'match': '\\b(instanceof)\\b'
+        'name': 'keyword.operator.instanceof.beyond'
+      }
+      {
+        'match': '(<<|>>>?|~|\\^)'
+        'name': 'keyword.operator.bitwise.beyond'
+      }
+      {
+        'match': '((&|\\^|\\||<<|>>>?)=)'
+        'name': 'keyword.operator.assignment.bitwise.beyond'
+      }
+      {
+        'match': '(===?|!=|<=|>=|<>|<|>)'
+        'name': 'keyword.operator.comparison.beyond'
+      }
+      {
+        'match': '([+*/%-]=)'
+        'name': 'keyword.operator.assignment.arithmetic.beyond'
+      }
+      {
+        'match': '(=)'
+        'name': 'keyword.operator.assignment.beyond'
+      }
+      {
+        'match': '(\\-\\-|\\+\\+)'
+        'name': 'keyword.operator.increment-decrement.beyond'
+      }
+      {
+        'match': '(\\-|\\+|\\*|\\/|%)'
+        'name': 'keyword.operator.arithmetic.beyond'
+      }
+      {
+        'match': '(!|&&|\\|\\|)'
+        'name': 'keyword.operator.logical.beyond'
+      }
+      {
+        'match': '(\\||&)'
+        'name': 'keyword.operator.bitwise.beyond'
+      }
+      {
+        'match': '\\b(const|goto)\\b'
+        'name': 'keyword.reserved.beyond'
+      }
+    ]
+  'lambda-expression':
+    'patterns': [
+      {
+        'match': '->'
+        'name': 'storage.type.function.arrow.beyond'
+      }
+    ]
+  'member-variables':
+    'begin': '(?=private|protected|public|native|synchronized|abstract|threadsafe|transient|static|final)'
+    'end': '(?=\\=|;)'
+    'patterns': [
+      {
+        'include': '#storage-modifiers'
+      }
+      {
+        'include': '#variables'
+      }
+      {
+        'include': '#primitive-arrays'
+      }
+      {
+        'include': '#object-types'
+      }
+    ]
+  'method-call':
+    'begin': '(\\.)\\s*([A-Za-z_$][\\w$]*)\\s*(\\()'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.separator.period.beyond'
+      '2':
+        'name': 'entity.name.function.beyond'
+      '3':
+        'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
+    'end': '\\)'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.parameters.end.bracket.round.beyond'
+    'name': 'meta.method-call.beyond'
+    'patterns': [
+      {
+        'include': '#code'
+      }
+    ]
+  'methods':
+    'begin': '(?!new)(?=[\\w<].*\\s+)(?=([^=/]|/(?!/))+\\()'
+    'end': '(})|(?=;)'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.section.method.end.bracket.curly.beyond'
+    'name': 'meta.method.beyond'
+    'patterns': [
+      {
+        'include': '#storage-modifiers'
+      }
+      {
+        'begin': '(\\w+)\\s*(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'entity.name.function.beyond'
+          '2':
+            'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
+        'end': '\\)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.parameters.end.bracket.round.beyond'
+        'name': 'meta.method.identifier.beyond'
+        'patterns': [
+          {
+            'include': '#parameters'
+          }
+          {
+            'include': '#parens'
+          }
+          {
+            'include': '#comments-inline'
+          }
+        ]
+      }
+      {
+        'include': '#generics'
+      }
+      {
+        'begin': '(?=\\w.*\\s+\\w+\\s*\\()'
+        'end': '(?=\\s+\\w+\\s*\\()'
+        'name': 'meta.method.return-type.beyond'
+        'patterns': [
+          {
+            'include': '#all-types'
+          }
+          {
+            'include': '#parens'
+          }
+        ]
+      }
+      {
+        'include': '#throws'
+      }
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.method.begin.bracket.curly.beyond'
+        'end': '(?=})'
+        'contentName': 'meta.method.body.beyond'
+        'patterns': [
+          {
+            'include': '#code'
+          }
+        ]
+      }
+      {
+        'include': '#comments'
+      }
+    ]
+  'module':
+    # a uniquely named, reusable group of related packages, as well as resources (such as images
+    # and XML files).
+    'begin': '((open)\\s)?(module)\\s+(\\w+)'
+    'end': '}'
+    'beginCaptures':
+      '1':
+        'name': 'storage.modifier.beyond'
+      '3':
+        'name': 'storage.modifier.beyond'
+      '4':
+        'name': 'entity.name.type.module.beyond'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.module.end.bracket.curly.beyond'
+    'name': 'meta.module.beyond'
+    'patterns': [
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.module.begin.bracket.curly.beyond'
+        'end': '(?=})'
+        'contentName': 'meta.module.body.beyond'
+        'patterns': [
+          # TODO: Write more rules for module grammar
+          {
+            'match': '\\b(requires|transitive|exports|opens|to|uses|provides|with)\\b'
+            'name': 'keyword.module.beyond'
+          }
+        ]
+      }
+    ]
+  'numbers':
+    # See http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.1 (integers)
+    # and http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.2 (floats)
+    # for the official specifications
+    'patterns': [
+      {
+        'match': '''(?x)
+          \\b(?<!\\$)
+          0(x|X)
+          (
+            (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)
+            |
+            (
+              [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?
+              |
+              ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?
+            )
+            [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?
+          )
+          \\b(?!\\$)
+        '''
+        'name': 'constant.numeric.hex.beyond'
+      }
+      {
+        'match': '\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)'
+        'name': 'constant.numeric.binary.beyond'
+      }
+      {
+        'match': '\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)'
+        'name': 'constant.numeric.octal.beyond'
+      }
+      {
+        'match': '''(?x)
+          (?<!\\$)
+          (
+            \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)
+            |
+            \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b
+            |
+            \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b
+            |
+            \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b
+            |
+            (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b
+            |
+            \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b
+            |
+            \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b
+            |
+            \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b
+          )
+          (?!\\$)
+        '''
+        'name': 'constant.numeric.decimal.beyond'
+      }
+    ]
+  'object-types':
+    'patterns': [
+      {
+        'include': '#generics'
+      }
+      {
+        'begin': '\\b((?:[A-Za-z]\\w*\\s*\\.\\s*)*)([A-Z]\\w*)\\s*(?=\\[)'
+        'beginCaptures':
+          '1':
+            'patterns': [
+              {
+                'match': '[A-Za-z]\\w*'
+                'name': 'storage.type.beyond'
+              }
+              {
+                'match': '\\.'
+                'name': 'punctuation.separator.period.beyond'
+              }
+            ]
+          '2':
+            'name': 'storage.type.object.array.beyond'
+        'end': '(?!\\s*\\[)'
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+          {
+            'include': '#parens'
+          }
+        ]
+      }
+      {
+        # Match possible generics first, eg Foo.Bar in Foo.Bar<String>
+        'match': '\\b((?:[A-Za-z]\\w*\\s*\\.\\s*)*[A-Z]\\w*)\\s*(?=<)'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'match': '[A-Za-z]\\w*'
+                'name': 'storage.type.beyond'
+              }
+              {
+                'match': '\\.'
+                'name': 'punctuation.separator.period.beyond'
+              }
+            ]
+      }
+      {
+        # If the above fails *then* just look for Wow
+        # (must be followed by a variable name, we use '\n' to cover multi-line definitions,
+        # or varargs for function definitions)
+        'match': '\\b((?:[A-Za-z]\\w*\\s*\\.\\s*)*[A-Z]\\w*)\\b((?=\\s*[A-Za-z$_\\n])|(?=\\s*\\.\\.\\.))'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'match': '[A-Za-z]\\w*'
+                'name': 'storage.type.beyond'
+              }
+              {
+                'match': '\\.'
+                'name': 'punctuation.separator.period.beyond'
+              }
+            ]
+      }
+    ]
+  'object-types-inherited':
+    'patterns': [
+      {
+        'include': '#generics'
+      }
+      {
+        'match': '\\b(?:[A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*\\b'
+        'name': 'entity.other.inherited-class.beyond'
+        'captures':
+          '1':
+            'name': 'punctuation.separator.period.beyond'
+      }
+      {
+        'match': ','
+        'name': 'punctuation.separator.delimiter.beyond'
+      }
+    ]
+  'objects':
+    # obj in obj.prop, obj.methodCall()
+    'match': '(?<![\\w$])[a-zA-Z_$][\\w$]*(?=\\s*\\.\\s*[\\w$]+)'
+    'name': 'variable.other.object.beyond'
+  'parameters':
+    'patterns': [
+      {
+        'match': '\\bfinal\\b'
+        'name': 'storage.modifier.beyond'
+      }
+      {
+        'include': '#annotations'
+      }
+      {
+        'include': '#all-types'
+      }
+      {
+        'include': '#strings'
+      }
+      {
+        'match': '\\w+'
+        'name': 'variable.parameter.beyond'
+      }
+      {
+        'match': ','
+        'name': 'punctuation.separator.delimiter.beyond'
+      },
+      {
+        'match': '\\.\\.\\.'
+        'name': 'punctuation.definition.parameters.varargs.beyond'
+      }
+    ]
+  'parens':
+    'patterns': [
+      {
+        'begin': '\\('
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.bracket.round.beyond'
+        'end': '\\)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.bracket.round.beyond'
+        'patterns': [
+          {
+            'include': '#code'
+          }
+        ]
+      }
+      {
+        'begin': '\\['
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.bracket.square.beyond'
+        'end': '\\]'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.bracket.square.beyond'
+        'patterns': [
+          {
+            'include': '#code'
+          }
+        ]
+      }
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.bracket.curly.beyond'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.bracket.curly.beyond'
+        'patterns': [
+          {
+            'include': '#code'
+          }
+        ]
+      }
+    ]
+  'primitive-arrays':
+    'patterns': [
+      {
+        'begin': '\\b(void|boolean|byte|char|short|int|float|long|double)\\b\\s*(?=\\[)'
+        'beginCaptures':
+          '1':
+            'name': 'storage.type.primitive.array.beyond'
+        'end': '(?!\\s*\\[)'
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+          {
+            'include': '#parens'
+          }
+        ]
+      }
+    ]
+  'primitive-types':
+    'match': '\\b(void|boolean|byte|char|short|int|float|long|double)\\b'
+    'name': 'storage.type.primitive.beyond'
+  'properties':
+    'patterns': [
+      {
+        # prop1 in obj.prop1.prop2, func().prop1.prop2
+        'match': '(\\.)\\s*([a-zA-Z_$][\\w$]*)(?=\\s*\\.\\s*[a-zA-Z_$][\\w$]*)'
+        'captures':
+          '1':
+            'name': 'punctuation.separator.period.beyond'
+          '2':
+            'name': 'variable.other.object.property.beyond'
+      }
+      {
+        # prop in obj.prop, func().prop
+        'match': '(\\.)\\s*([a-zA-Z_$][\\w$]*)'
+        'captures':
+          '1':
+            'name': 'punctuation.separator.period.beyond'
+          '2':
+            'name': 'variable.other.property.beyond'
+      }
+      {
+        # 123illegal in obj.123illegal, func().123illegal
+        'match': '(\\.)\\s*([0-9][\\w$]*)'
+        'captures':
+          '1':
+            'name': 'punctuation.separator.period.beyond'
+          '2':
+            'name': 'invalid.illegal.identifier.beyond'
+      }
+    ]
+  'static-initializer':
+    'patterns': [
+      {
+        'include': '#anonymous-block-and-instance-initializer'
+      }
+      {
+        'match': 'static'
+        'name': 'storage.modifier.beyond'
+      }
+    ]
+  'storage-modifiers':
+    'match': '\\b(public|private|protected|static|final|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
+    'name': 'storage.modifier.beyond'
+  'strings':
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.beyond'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.beyond'
+        'name': 'string.quoted.double.beyond'
+        'patterns': [
+          {
+            'match': '\\\\.'
+            'name': 'constant.character.escape.beyond'
+          }
+        ]
+      }
+      {
+        'begin': '\''
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.beyond'
+        'end': '\''
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.beyond'
+        'name': 'string.quoted.single.beyond'
+        'patterns': [
+          {
+            'match': '\\\\.'
+            'name': 'constant.character.escape.beyond'
+          }
+        ]
+      }
+    ]
+  'throws':
+    'begin': 'throws'
+    'beginCaptures':
+      '0':
+        'name': 'storage.modifier.beyond'
+    'end': '(?={|;)'
+    'name': 'meta.throwables.beyond'
+    'patterns': [
+      {
+        'match': ','
+        'name': 'punctuation.separator.delimiter.beyond'
+      }
+      {
+        'match': '[a-zA-Z$_][\\.a-zA-Z0-9$_]*'
+        'name': 'storage.type.beyond'
+      }
+    ]
+  'try-catch-finally':
+    'patterns': [
+      # try block
+      {
+        'begin': '\\btry\\b'
+        'beginCaptures':
+          '0':
+            'name': 'keyword.control.try.beyond'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.try.end.bracket.curly.beyond'
+        'name': 'meta.try.beyond'
+        'patterns': [
+          {
+            'begin': '\\('
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.section.try.resources.begin.bracket.round.beyond'
+            'end': '\\)'
+            'endCaptures':
+              '0':
+                'name': 'punctuation.section.try.resources.end.bracket.round.beyond'
+            'name': 'meta.try.resources.beyond'
+            'patterns': [
+              {
+                'include': '#code'
+              }
+            ]
+          }
+          {
+            'begin': '{'
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.section.try.begin.bracket.curly.beyond'
+            'end': '(?=})'
+            'contentName': 'meta.try.body.beyond'
+            'patterns': [
+              {
+                'include': '#code'
+              }
+            ]
+          }
+        ]
+      }
+      # catch block (with "parameters")
+      {
+        'begin': '\\b(catch)\\b\\s*(?=\\(\\s*[^\\s]+\\s*[^)]+\\))'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.control.catch.beyond'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.catch.end.bracket.curly.beyond'
+        'name': 'meta.catch.beyond'
+        'patterns': [
+          {
+            'begin': '\\('
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
+            'end': '\\)'
+            'endCaptures':
+              '0':
+                'name': 'punctuation.definition.parameters.end.bracket.round.jabeyondva'
+            'contentName': 'meta.catch.parameters.beyond'
+            'patterns': [
+              {
+                'include': '#comments'
+              }
+              {
+                'match': '\\|'
+                'name': 'punctuation.catch.separator.beyond'
+              }
+              {
+                'match': '([a-zA-Z$_][\\.a-zA-Z0-9$_]*)\\s*(\\w+)?'
+                'captures':
+                  '1':
+                    'name': 'storage.type.beyond'
+                  '2':
+                    'name': 'variable.parameter.beyond'
+              }
+            ]
+          }
+          {
+            'begin': '{'
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.section.catch.begin.bracket.curly.beyond'
+            'end': '(?=})'
+            'contentName': 'meta.catch.body.beyond'
+            'patterns': [
+              {
+                'include': '#code'
+              }
+            ]
+          }
+        ]
+      }
+      # finally block
+      {
+        'begin': '\\bfinally\\b'
+        'beginCaptures':
+          '0':
+            'name': 'keyword.control.finally.beyond'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.finally.end.bracket.curly.beyond'
+        'name': 'meta.finally.beyond'
+        'patterns': [
+          {
+            'begin': '{'
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.section.finally.begin.bracket.curly.beyond'
+            'end': '(?=})'
+            'contentName': 'meta.finally.body.beyond'
+            'patterns': [
+              {
+                'include': '#code'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  'variables':
+    'begin': '''(?x)
+      (?=
+        (
+          \\b(void|boolean|byte|char|short|int|float|long|double)\\b
+          |
+          (?>(\\w+\\.)*[A-Z]+\\w*)
+        )
+        (
+          <[\\w<>,\\.?\\s\\[\\]]*>
+        )?
+        (
+          (\\[\\])* # int[][]
+        )?
+        \\s+
+        [A-Za-z_$][\\w$]* # At least one identifier after space
+        ([\\w\\[\\],$][\\w\\[\\],\\s]*)? # possibly primitive array or additional identifiers
+        \\s*(=|;)
+      )
+    '''
+    'end': '(?=\\=|;)'
+    'name': 'meta.definition.variable.beyond'
+    'patterns': [
+      {
+        'match': '([A-Za-z$_][\\w$]*)(?=\\s*(\\[\\])*\\s*(;|=|,))'
+        'captures':
+          '1':
+            'name': 'variable.other.definition.beyond'
+      }
+      {
+        'include': '#all-types'
+      }
+      {
+        'include': '#code'
+      }
+    ]
