@@ -518,7 +518,7 @@
   'constants-and-special-vars':
     'patterns': [
       {
-        'match': '\\b(true|false|null)\\b'
+        'match': '\\b(true|false)\\b'
         'name': 'constant.language.beyond'
       }
       {
