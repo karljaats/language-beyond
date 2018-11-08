@@ -1112,7 +1112,7 @@
     ]
   'primitive-types':
     'match': '\\b()\\b'
-    'match': '\\b(void|int|long|boolean|float|double|uint)\\b'
+    'match': '\\b(void|int|long|boolean|float|double|uint|fridge|constexpr)\\b'
     'name': 'storage.type.primitive.beyond'
   'properties':
     'patterns': [
