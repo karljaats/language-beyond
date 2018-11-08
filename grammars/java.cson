@@ -1155,7 +1155,8 @@
       }
     ]
   'storage-modifiers':
-    'match': '\\b(public|private|protected|static|final|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
+    'match': '\\b(unitary|promised_unitary" (%% | ctrl '(' identifier? ')' |dagger)|public|private|protected|static|final)\\b'
+    #|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
     'name': 'storage.modifier.beyond'
   'strings':
     'patterns': [
