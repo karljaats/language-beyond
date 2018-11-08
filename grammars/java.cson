@@ -710,7 +710,7 @@
         'name': 'keyword.operator.increment-decrement.beyond'
       }
       {
-        'match': '(\\-|\\+|\\*|\\/|%)'
+        'match': '(\\-|\\+|\\*|\\/)'
         'name': 'keyword.operator.arithmetic.beyond'
       }
       {
