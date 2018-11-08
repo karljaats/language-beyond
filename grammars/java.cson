@@ -694,7 +694,7 @@
         'name': 'keyword.operator.assignment.bitwise.beyond'
       }
       {
-        'match': '(===?|!=|<=|>=|<>|<|>)'
+        'match': '(==|!=|<=|>=|<>|<|>)'
         'name': 'keyword.operator.comparison.beyond'
       }
       {
