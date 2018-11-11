@@ -149,21 +149,6 @@
           }
         ]
       }
-      {
-        'match': '(@)(interface)\\s+(\\w*)|((@)\\w*)'
-        'name': 'meta.declaration.annotation.beyond'
-        'captures':
-          '1':
-            'name': 'punctuation.definition.annotation.beyond'
-          '2':
-            'name': 'storage.modifier.beyond'
-          '3':
-            'name': 'storage.type.annotation.beyond'
-          '4':
-            'name': 'storage.type.annotation.beyond'
-          '5':
-            'name': 'punctuation.definition.annotation.beyond'
-      }
     ]
   'anonymous-block-and-instance-initializer':
     'begin': '{'
