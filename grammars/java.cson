@@ -728,7 +728,7 @@
       }
     ]
   'member-variables':
-    'begin': '(?=private|protected|public|native|synchronized|abstract|threadsafe|transient|static|final)'
+    'begin': '(?=private|protected|public|static|final|fridge|constexpr)'
     'end': '(?=\\=|;)'
     'patterns': [
       {
