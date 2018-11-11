@@ -710,7 +710,7 @@
         'name': 'keyword.operator.increment-decrement.beyond'
       }
       {
-        'match': '(\\-|\\+|\\*|\\/)'
+        'match': '(\\-|\\+|\\*|\\/|\\%)'
         'name': 'keyword.operator.arithmetic.beyond'
       }
       {
@@ -1095,7 +1095,7 @@
   'primitive-arrays':
     'patterns': [
       {
-        'begin': '\\b(void|boolean|byte|char|short|int|float|long|double)\\b\\s*(?=\\[)'
+        'begin': '\\b(void|boolean|short|int|float|long|double|uint|fridge|constexpr)\\b\\s*(?=\\[)'
         'beginCaptures':
           '1':
             'name': 'storage.type.primitive.array.beyond'
