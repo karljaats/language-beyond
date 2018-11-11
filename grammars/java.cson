@@ -676,10 +676,6 @@
         'name': 'keyword.control.beyond'
       }
       {
-        'match': '\\b(instanceof)\\b'
-        'name': 'keyword.operator.instanceof.beyond'
-      }
-      {
         'match': '(<<|>>>?|~|\\^)'
         'name': 'keyword.operator.bitwise.beyond'
       }
@@ -714,10 +710,6 @@
       {
         'match': '(\\||&)'
         'name': 'keyword.operator.bitwise.beyond'
-      }
-      {
-        'match': '\\b(const|goto)\\b'
-        'name': 'keyword.reserved.beyond'
       }
     ]
   'lambda-expression':
