@@ -34,13 +34,10 @@
       {
         # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
         'match': '''(?x)\\b(?<!\\$)
-                    (abstract|assert|boolean|break|byte|case|catch|char|class|
-                    const|continue|default|do|double|else|enum|extends|final|
-                    finally|float|for|goto|if|implements|import|instanceof|int|
-                    interface|long|native|new|package|private|protected|public|
-                    return|short|static|strictfp|super|switch|syncronized|this|
-                    throw|throws|transient|try|void|volatile|while|unitary|fridge|constexpr|uint|
-                    true|false|null)\\b
+                    (boolean|class|do|double|else||extends|final|float|for|if|import|int|
+                    new|package|private|protected|public|return|static|super|this|
+                    void|while|unitary|fridge|constexpr|uint|true|false|null|unitary|fixed|fridge|
+                    constexpr|code_below|delayed_code|ctrl|dagger|compile_time_assert|uint|ufixed)\\b
                   '''
         'name': 'invalid.illegal.character_not_allowed_here.beyond'
       }
@@ -82,13 +79,10 @@
       {
         # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
         'match': '''(?x)\\b(?<!\\$)
-                    (abstract|assert|boolean|break|byte|case|catch|char|class|
-                    const|continue|default|do|double|else|enum|extends|final|
-                    finally|float|for|goto|if|implements|import|instanceof|int|
-                    interface|long|native|new|package|private|protected|public|
-                    return|short|static|strictfp|super|switch|syncronized|this|
-                    throw|throws|transient|try|void|volatile|while|
-                    true|false|null)\\b
+                    (boolean|class|do|double|else||extends|final|float|for|if|import|int|
+                    new|package|private|protected|public|return|static|super|this|
+                    void|while|unitary|fridge|constexpr|uint|true|false|null|unitary|fixed|fridge|
+                    constexpr|code_below|delayed_code|ctrl|dagger|compile_time_assert|uint|ufixed)\\b
                   '''
         'name': 'invalid.illegal.character_not_allowed_here.beyond'
       }
@@ -433,7 +427,7 @@
         'captures':
           '0':
             'name': 'punctuation.definition.comment.beyond'
-        'match': '/\\*\\*/'
+        'match': '(/\\*\\*/)'
         'name': 'comment.block.empty.beyond'
       }
       {
