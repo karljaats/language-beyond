@@ -316,9 +316,6 @@
         'include': '#comments'
       }
       {
-        'include': '#enums'
-      }
-      {
         'include': '#class'
       }
       {
@@ -350,9 +347,6 @@
       }
       {
         'include': '#comments'
-      }
-      {
-        'include': '#enums'
       }
       {
         'include': '#class'
@@ -513,73 +507,7 @@
         'name': 'variable.language.beyond'
       }
     ]
-  'enums':
-    'begin': '^\\s*([\\w\\s]*)(enum)\\s+(\\w+)'
-    'beginCaptures':
-      '1':
-        'patterns': [
-          {
-            'include': '#storage-modifiers'
-          }
-        ]
-      '2':
-        'name': 'storage.modifier.beyond'
-      '3':
-        'name': 'entity.name.type.enum.beyond'
-    'end': '}'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.section.enum.end.bracket.curly.beyond'
-    'name': 'meta.enum.beyond'
-    'patterns': [
-      {
-        'begin': '{'
-        'beginCaptures':
-          '0':
-            'name': 'punctuation.section.enum.begin.bracket.curly.beyond'
-        'end': '(?=})'
-        'patterns': [
-          {
-            'begin': '(?<={)'
-            'end': '(?=;|})'
-            'patterns': [
-              {
-                'include': '#comments-javadoc'
-              }
-              {
-                'include': '#comments'
-              }
-              # Represents enum's constant field with constructor, e.g. `Test(123)`
-              {
-                'begin': '(\\w+)\\s*(\\()'
-                'beginCaptures':
-                  '1':
-                    'name': 'constant.other.enum.beyond'
-                  '2':
-                    'name': 'punctuation.bracket.round.beyond'
-                'end': '\\)'
-                'endCaptures':
-                  '0':
-                    'name': 'punctuation.bracket.round.beyond'
-                'patterns': [
-                  {
-                    'include': '#code'
-                  }
-                ]
-              }
-              # Represents enum's constant field, e.g. `Test`
-              {
-                'match': '\\b\\w+\\b'
-                'name': 'constant.other.enum.beyond'
-              }
-            ]
-          }
-          {
-            'include': '#class-body'
-          }
-        ]
-      }
-    ]
+
   'function-call':
     'begin': '([A-Za-z_$][\\w$]*)\\s*(\\()'
     'beginCaptures':
