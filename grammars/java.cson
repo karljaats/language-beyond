@@ -361,9 +361,6 @@
         'include': '#anonymous-block-and-instance-initializer'
       }
       {
-        'include': '#try-catch-finally'
-      }
-      {
         'include': '#assertions'
       }
       {
@@ -488,14 +485,6 @@
               'name': 'keyword.other.documentation.javadoc.beyond'
             '2':
               'name': 'variable.parameter.beyond'
-        }
-        {
-          'match': '(@(?:exception|throws))\\s+(\\S+)'
-          'captures':
-            '1':
-              'name': 'keyword.other.documentation.javadoc.beyond'
-            '2':
-              'name': 'entity.name.type.class.beyond'
         }
         {
           'match': '{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*}'
@@ -664,10 +653,6 @@
   'keywords':
     'patterns': [
       {
-        'match': '\\bthrow\\b'
-        'name': 'keyword.control.throw.beyond'
-      }
-      {
         'match': '\\?|:'
         'name': 'keyword.control.ternary.beyond'
       }
@@ -805,9 +790,6 @@
             'include': '#parens'
           }
         ]
-      }
-      {
-        'include': '#throws'
       }
       {
         'begin': '{'
@@ -1181,151 +1163,7 @@
         ]
       }
     ]
-  'throws':
-    'begin': 'throws'
-    'beginCaptures':
-      '0':
-        'name': 'storage.modifier.beyond'
-    'end': '(?={|;)'
-    'name': 'meta.throwables.beyond'
-    'patterns': [
-      {
-        'match': ','
-        'name': 'punctuation.separator.delimiter.beyond'
-      }
-      {
-        'match': '[a-zA-Z$_][\\.a-zA-Z0-9$_]*'
-        'name': 'storage.type.beyond'
-      }
-    ]
-  'try-catch-finally':
-    'patterns': [
-      # try block
-      {
-        'begin': '\\btry\\b'
-        'beginCaptures':
-          '0':
-            'name': 'keyword.control.try.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.try.end.bracket.curly.beyond'
-        'name': 'meta.try.beyond'
-        'patterns': [
-          {
-            'begin': '\\('
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.try.resources.begin.bracket.round.beyond'
-            'end': '\\)'
-            'endCaptures':
-              '0':
-                'name': 'punctuation.section.try.resources.end.bracket.round.beyond'
-            'name': 'meta.try.resources.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.try.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.try.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-      # catch block (with "parameters")
-      {
-        'begin': '\\b(catch)\\b\\s*(?=\\(\\s*[^\\s]+\\s*[^)]+\\))'
-        'beginCaptures':
-          '1':
-            'name': 'keyword.control.catch.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.catch.end.bracket.curly.beyond'
-        'name': 'meta.catch.beyond'
-        'patterns': [
-          {
-            'begin': '\\('
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
-            'end': '\\)'
-            'endCaptures':
-              '0':
-                'name': 'punctuation.definition.parameters.end.bracket.round.jabeyondva'
-            'contentName': 'meta.catch.parameters.beyond'
-            'patterns': [
-              {
-                'include': '#comments'
-              }
-              {
-                'match': '\\|'
-                'name': 'punctuation.catch.separator.beyond'
-              }
-              {
-                'match': '([a-zA-Z$_][\\.a-zA-Z0-9$_]*)\\s*(\\w+)?'
-                'captures':
-                  '1':
-                    'name': 'storage.type.beyond'
-                  '2':
-                    'name': 'variable.parameter.beyond'
-              }
-            ]
-          }
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.catch.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.catch.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-      # finally block
-      {
-        'begin': '\\bfinally\\b'
-        'beginCaptures':
-          '0':
-            'name': 'keyword.control.finally.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.finally.end.bracket.curly.beyond'
-        'name': 'meta.finally.beyond'
-        'patterns': [
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.finally.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.finally.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+
   'variables':
     'begin': '''(?x)
       (?=
