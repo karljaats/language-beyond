@@ -34,13 +34,10 @@
       {
         # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
         'match': '''(?x)\\b(?<!\\$)
-                    (abstract|assert|boolean|break|byte|case|catch|char|class|
-                    const|continue|default|do|double|else|enum|extends|final|
-                    finally|float|for|goto|if|implements|import|instanceof|int|
-                    interface|long|native|new|package|private|protected|public|
-                    return|short|static|strictfp|super|switch|syncronized|this|
-                    throw|throws|transient|try|void|volatile|while|
-                    true|false|null)\\b
+                    (boolean|class|do|double|else|extends|final|float|for|if|import|int|
+                    new|package|private|protected|public|return|static|super|this|
+                    void|while|unitary|fridge|constexpr|uint|true|false|null|unitary|fixed|fridge|
+                    constexpr|code_below|delayed_code|ctrl|dagger|compile_time_assert|uint|ufixed)\\b
                   '''
         'name': 'invalid.illegal.character_not_allowed_here.beyond'
       }
@@ -82,13 +79,10 @@
       {
         # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
         'match': '''(?x)\\b(?<!\\$)
-                    (abstract|assert|boolean|break|byte|case|catch|char|class|
-                    const|continue|default|do|double|else|enum|extends|final|
-                    finally|float|for|goto|if|implements|import|instanceof|int|
-                    interface|long|native|new|package|private|protected|public|
-                    return|short|static|strictfp|super|switch|syncronized|this|
-                    throw|throws|transient|try|void|volatile|while|
-                    true|false|null)\\b
+                    (boolean|class|do|double|else||extends|final|float|for|if|import|int|
+                    new|package|private|protected|public|return|static|super|this|
+                    void|while|true|false|null|unitary|fixed|fridge|
+                    constexpr|code_below|delayed_code|ctrl|dagger|compile_time_assert|uint|ufixed)\\b
                   '''
         'name': 'invalid.illegal.character_not_allowed_here.beyond'
       }
@@ -155,21 +149,6 @@
           }
         ]
       }
-      {
-        'match': '(@)(interface)\\s+(\\w*)|((@)\\w*)'
-        'name': 'meta.declaration.annotation.beyond'
-        'captures':
-          '1':
-            'name': 'punctuation.definition.annotation.beyond'
-          '2':
-            'name': 'storage.modifier.beyond'
-          '3':
-            'name': 'storage.type.annotation.beyond'
-          '4':
-            'name': 'storage.type.annotation.beyond'
-          '5':
-            'name': 'punctuation.definition.annotation.beyond'
-      }
     ]
   'anonymous-block-and-instance-initializer':
     'begin': '{'
@@ -221,28 +200,8 @@
         'include': '#parens'
       }
     ]
-  'assertions':
-    'patterns': [
-      {
-        'begin': '\\b(assert)\\s'
-        'beginCaptures':
-          '1':
-            'name': 'keyword.control.assert.beyond'
-        'end': '$'
-        'name': 'meta.declaration.assertion.beyond'
-        'patterns': [
-          {
-            'match': ':'
-            'name': 'keyword.operator.assert.expression-separator.beyond'
-          }
-          {
-            'include': '#code'
-          }
-        ]
-      }
-    ]
   'class':
-    'begin': '(?=\\w?[\\w\\s]*(?:class|(?<!@)interface|enum)\\s+\\w+)'
+    'begin': '(?=\\w?[\\w\\s]*(?:class)\\s+\\w+)'
     'end': '}'
     'endCaptures':
       '0':
@@ -264,7 +223,7 @@
             'name': 'storage.modifier.beyond'
           '2':
             'name': 'entity.name.type.class.beyond'
-        'match': '(class|(?<!@)interface|enum)\\s+(\\w+)'
+        'match': '(class)\\s+(\\w+)'
         'name': 'meta.class.identifier.beyond'
       }
       {
@@ -272,7 +231,6 @@
         'beginCaptures':
           '0':
             'name': 'storage.modifier.extends.beyond'
-        'end': '(?={|implements)'
         'name': 'meta.definition.class.inherited.classes.beyond'
         'patterns': [
           {
@@ -283,20 +241,6 @@
           }
         ]
       }
-      {
-        'begin': '(implements)\\s'
-        'beginCaptures':
-          '1':
-            'name': 'storage.modifier.implements.beyond'
-        'end': '(?=\\s*extends|\\{)'
-        'name': 'meta.definition.class.implemented.interfaces.beyond'
-        'patterns': [
-          {
-            'include': '#object-types-inherited'
-          }
-          {
-            'include': '#comments'
-          }
         ]
       }
       {
@@ -320,9 +264,6 @@
       }
       {
         'include': '#comments'
-      }
-      {
-        'include': '#enums'
       }
       {
         'include': '#class'
@@ -358,19 +299,10 @@
         'include': '#comments'
       }
       {
-        'include': '#enums'
-      }
-      {
         'include': '#class'
       }
       {
         'include': '#anonymous-block-and-instance-initializer'
-      }
-      {
-        'include': '#try-catch-finally'
-      }
-      {
-        'include': '#assertions'
       }
       {
         'include': '#parens'
@@ -433,7 +365,7 @@
         'captures':
           '0':
             'name': 'punctuation.definition.comment.beyond'
-        'match': '/\\*\\*/'
+        'match': '(/\\*\\*/)'
         'name': 'comment.block.empty.beyond'
       }
       {
@@ -496,14 +428,6 @@
               'name': 'variable.parameter.beyond'
         }
         {
-          'match': '(@(?:exception|throws))\\s+(\\S+)'
-          'captures':
-            '1':
-              'name': 'keyword.other.documentation.javadoc.beyond'
-            '2':
-              'name': 'entity.name.type.class.beyond'
-        }
-        {
           'match': '{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*}'
           'captures':
             '1':
@@ -518,7 +442,7 @@
   'constants-and-special-vars':
     'patterns': [
       {
-        'match': '\\b(true|false|null)\\b'
+        'match': '\\b(true|false)\\b'
         'name': 'constant.language.beyond'
       }
       {
@@ -530,73 +454,7 @@
         'name': 'variable.language.beyond'
       }
     ]
-  'enums':
-    'begin': '^\\s*([\\w\\s]*)(enum)\\s+(\\w+)'
-    'beginCaptures':
-      '1':
-        'patterns': [
-          {
-            'include': '#storage-modifiers'
-          }
-        ]
-      '2':
-        'name': 'storage.modifier.beyond'
-      '3':
-        'name': 'entity.name.type.enum.beyond'
-    'end': '}'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.section.enum.end.bracket.curly.beyond'
-    'name': 'meta.enum.beyond'
-    'patterns': [
-      {
-        'begin': '{'
-        'beginCaptures':
-          '0':
-            'name': 'punctuation.section.enum.begin.bracket.curly.beyond'
-        'end': '(?=})'
-        'patterns': [
-          {
-            'begin': '(?<={)'
-            'end': '(?=;|})'
-            'patterns': [
-              {
-                'include': '#comments-javadoc'
-              }
-              {
-                'include': '#comments'
-              }
-              # Represents enum's constant field with constructor, e.g. `Test(123)`
-              {
-                'begin': '(\\w+)\\s*(\\()'
-                'beginCaptures':
-                  '1':
-                    'name': 'constant.other.enum.beyond'
-                  '2':
-                    'name': 'punctuation.bracket.round.beyond'
-                'end': '\\)'
-                'endCaptures':
-                  '0':
-                    'name': 'punctuation.bracket.round.beyond'
-                'patterns': [
-                  {
-                    'include': '#code'
-                  }
-                ]
-              }
-              # Represents enum's constant field, e.g. `Test`
-              {
-                'match': '\\b\\w+\\b'
-                'name': 'constant.other.enum.beyond'
-              }
-            ]
-          }
-          {
-            'include': '#class-body'
-          }
-        ]
-      }
-    ]
+
   'function-call':
     'begin': '([A-Za-z_$][\\w$]*)\\s*(\\()'
     'beginCaptures':
@@ -670,20 +528,12 @@
   'keywords':
     'patterns': [
       {
-        'match': '\\bthrow\\b'
-        'name': 'keyword.control.throw.beyond'
-      }
-      {
         'match': '\\?|:'
         'name': 'keyword.control.ternary.beyond'
       }
       {
-        'match': '\\b(return|break|case|continue|default|do|while|for|switch|if|else)\\b'
+        'match': '\\b(return|do|while|for|switch|if|else)\\b'
         'name': 'keyword.control.beyond'
-      }
-      {
-        'match': '\\b(instanceof)\\b'
-        'name': 'keyword.operator.instanceof.beyond'
       }
       {
         'match': '(<<|>>>?|~|\\^)'
@@ -694,7 +544,7 @@
         'name': 'keyword.operator.assignment.bitwise.beyond'
       }
       {
-        'match': '(===?|!=|<=|>=|<>|<|>)'
+        'match': '(==|!=|<=|>=|<>|<|>)'
         'name': 'keyword.operator.comparison.beyond'
       }
       {
@@ -710,7 +560,7 @@
         'name': 'keyword.operator.increment-decrement.beyond'
       }
       {
-        'match': '(\\-|\\+|\\*|\\/|%)'
+        'match': '(\\-|\\+|\\*|\\/|\\%)'
         'name': 'keyword.operator.arithmetic.beyond'
       }
       {
@@ -721,10 +571,6 @@
         'match': '(\\||&)'
         'name': 'keyword.operator.bitwise.beyond'
       }
-      {
-        'match': '\\b(const|goto)\\b'
-        'name': 'keyword.reserved.beyond'
-      }
     ]
   'lambda-expression':
     'patterns': [
@@ -734,7 +580,7 @@
       }
     ]
   'member-variables':
-    'begin': '(?=private|protected|public|native|synchronized|abstract|threadsafe|transient|static|final)'
+    'begin': '(?=private|protected|public|static|final|fridge|constexpr)'
     'end': '(?=\\=|;)'
     'patterns': [
       {
@@ -819,9 +665,6 @@
             'include': '#parens'
           }
         ]
-      }
-      {
-        'include': '#throws'
       }
       {
         'begin': '{'
@@ -1095,7 +938,7 @@
   'primitive-arrays':
     'patterns': [
       {
-        'begin': '\\b(void|boolean|byte|char|short|int|float|long|double)\\b\\s*(?=\\[)'
+        'begin': '\\b(void|boolean|int|float|double|uint|fridge|constexpr)\\b\\s*(?=\\[)'
         'beginCaptures':
           '1':
             'name': 'storage.type.primitive.array.beyond'
@@ -1111,7 +954,8 @@
       }
     ]
   'primitive-types':
-    'match': '\\b(void|boolean|byte|char|short|int|float|long|double)\\b'
+    'match': '\\b()\\b'
+    'match': '\\b(void|int|boolean|float|double|uint|fridge|constexpr)\\b'
     'name': 'storage.type.primitive.beyond'
   'properties':
     'patterns': [
@@ -1154,7 +998,8 @@
       }
     ]
   'storage-modifiers':
-    'match': '\\b(public|private|protected|static|final|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
+    'match': '\\b(unitary|promised_unitary" (%% | ctrl '(' identifier? ')' |dagger)|public|private|protected|static|final)\\b'
+    #|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
     'name': 'storage.modifier.beyond'
   'strings':
     'patterns': [
@@ -1193,156 +1038,12 @@
         ]
       }
     ]
-  'throws':
-    'begin': 'throws'
-    'beginCaptures':
-      '0':
-        'name': 'storage.modifier.beyond'
-    'end': '(?={|;)'
-    'name': 'meta.throwables.beyond'
-    'patterns': [
-      {
-        'match': ','
-        'name': 'punctuation.separator.delimiter.beyond'
-      }
-      {
-        'match': '[a-zA-Z$_][\\.a-zA-Z0-9$_]*'
-        'name': 'storage.type.beyond'
-      }
-    ]
-  'try-catch-finally':
-    'patterns': [
-      # try block
-      {
-        'begin': '\\btry\\b'
-        'beginCaptures':
-          '0':
-            'name': 'keyword.control.try.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.try.end.bracket.curly.beyond'
-        'name': 'meta.try.beyond'
-        'patterns': [
-          {
-            'begin': '\\('
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.try.resources.begin.bracket.round.beyond'
-            'end': '\\)'
-            'endCaptures':
-              '0':
-                'name': 'punctuation.section.try.resources.end.bracket.round.beyond'
-            'name': 'meta.try.resources.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.try.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.try.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-      # catch block (with "parameters")
-      {
-        'begin': '\\b(catch)\\b\\s*(?=\\(\\s*[^\\s]+\\s*[^)]+\\))'
-        'beginCaptures':
-          '1':
-            'name': 'keyword.control.catch.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.catch.end.bracket.curly.beyond'
-        'name': 'meta.catch.beyond'
-        'patterns': [
-          {
-            'begin': '\\('
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
-            'end': '\\)'
-            'endCaptures':
-              '0':
-                'name': 'punctuation.definition.parameters.end.bracket.round.jabeyondva'
-            'contentName': 'meta.catch.parameters.beyond'
-            'patterns': [
-              {
-                'include': '#comments'
-              }
-              {
-                'match': '\\|'
-                'name': 'punctuation.catch.separator.beyond'
-              }
-              {
-                'match': '([a-zA-Z$_][\\.a-zA-Z0-9$_]*)\\s*(\\w+)?'
-                'captures':
-                  '1':
-                    'name': 'storage.type.beyond'
-                  '2':
-                    'name': 'variable.parameter.beyond'
-              }
-            ]
-          }
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.catch.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.catch.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-      # finally block
-      {
-        'begin': '\\bfinally\\b'
-        'beginCaptures':
-          '0':
-            'name': 'keyword.control.finally.beyond'
-        'end': '}'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.section.finally.end.bracket.curly.beyond'
-        'name': 'meta.finally.beyond'
-        'patterns': [
-          {
-            'begin': '{'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.section.finally.begin.bracket.curly.beyond'
-            'end': '(?=})'
-            'contentName': 'meta.finally.body.beyond'
-            'patterns': [
-              {
-                'include': '#code'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+
   'variables':
     'begin': '''(?x)
       (?=
         (
-          \\b(void|boolean|byte|char|short|int|float|long|double)\\b
+          \\b(void|boolean|int|float|double|fridge|constexpr)\\b
           |
           (?>(\\w+\\.)*[A-Z]+\\w*)
         )
