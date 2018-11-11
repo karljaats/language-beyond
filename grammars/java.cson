@@ -34,7 +34,7 @@
       {
         # http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
         'match': '''(?x)\\b(?<!\\$)
-                    (boolean|class|do|double|else||extends|final|float|for|if|import|int|
+                    (boolean|class|do|double|else|extends|final|float|for|if|import|int|
                     new|package|private|protected|public|return|static|super|this|
                     void|while|unitary|fridge|constexpr|uint|true|false|null|unitary|fixed|fridge|
                     constexpr|code_below|delayed_code|ctrl|dagger|compile_time_assert|uint|ufixed)\\b
@@ -215,26 +215,6 @@
         'include': '#parens'
       }
     ]
-  'assertions':
-    'patterns': [
-      {
-        'begin': '\\b(assert)\\s'
-        'beginCaptures':
-          '1':
-            'name': 'keyword.control.assert.beyond'
-        'end': '$'
-        'name': 'meta.declaration.assertion.beyond'
-        'patterns': [
-          {
-            'match': ':'
-            'name': 'keyword.operator.assert.expression-separator.beyond'
-          }
-          {
-            'include': '#code'
-          }
-        ]
-      }
-    ]
   'class':
     'begin': '(?=\\w?[\\w\\s]*(?:class)\\s+\\w+)'
     'end': '}'
@@ -266,7 +246,6 @@
         'beginCaptures':
           '0':
             'name': 'storage.modifier.extends.beyond'
-        'end': '(?={|implements)'
         'name': 'meta.definition.class.inherited.classes.beyond'
         'patterns': [
           {
@@ -277,20 +256,6 @@
           }
         ]
       }
-      {
-        'begin': '(implements)\\s'
-        'beginCaptures':
-          '1':
-            'name': 'storage.modifier.implements.beyond'
-        'end': '(?=\\s*extends|\\{)'
-        'name': 'meta.definition.class.implemented.interfaces.beyond'
-        'patterns': [
-          {
-            'include': '#object-types-inherited'
-          }
-          {
-            'include': '#comments'
-          }
         ]
       }
       {
@@ -353,9 +318,6 @@
       }
       {
         'include': '#anonymous-block-and-instance-initializer'
-      }
-      {
-        'include': '#assertions'
       }
       {
         'include': '#parens'
