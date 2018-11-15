@@ -241,8 +241,6 @@
           }
         ]
       }
-        ]
-      }
       {
         'begin': '{'
         'beginCaptures':
@@ -442,7 +440,7 @@
   'constants-and-special-vars':
     'patterns': [
       {
-        'match': '\\b(true|false)\\b'
+        'match': '\\b(true|false|null)\\b'
         'name': 'constant.language.beyond'
       }
       {
@@ -998,7 +996,11 @@
       }
     ]
   'storage-modifiers':
+<<<<<<< HEAD:grammars/java.cson
     'match': '\\b(unitary|promised_unitary (%% | ctrl '(' identifier? ')' |dagger)|public|private|protected|static|final)\\b'
+=======
+    'match': '\\b(unitary|promised_unitary" (%% | ctrl ( identifier? ) |dagger)|public|private|protected|static|final)\\b'
+>>>>>>> eeb05b4ae4a9dcdfe5fbbc2a5378f6e885dc6bfc:grammars/beyond.cson
     #|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
     'name': 'storage.modifier.beyond'
   'strings':
