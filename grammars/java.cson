@@ -998,7 +998,7 @@
       }
     ]
   'storage-modifiers':
-    'match': '\\b(unitary|promised_unitary" (%% | ctrl '(' identifier? ')' |dagger)|public|private|protected|static|final)\\b'
+    'match': '\\b(unitary|promised_unitary (%% | ctrl '(' identifier? ')' |dagger)|public|private|protected|static|final)\\b'
     #|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b'
     'name': 'storage.modifier.beyond'
   'strings':
