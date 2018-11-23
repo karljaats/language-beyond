@@ -5,18 +5,3 @@
     'increaseIndentPattern': '^.*\\{(\\}|[^}"\']*)$|^\\s*(public|private|protected):\\s*$'
     'decreaseIndentPattern': '^(.*\\*/)?\\s*\\}|^\\s*(public|private|protected):\\s*$'
     'tabLength': '4'
-'.keyword.other.documentation.javadoc.java':
-  'editor':
-    'completions': [
-      'author'
-      'deprecated'
-      'exception'
-      'link'
-      'param'
-      'return'
-      'see'
-      'serial'
-      'since'
-      'throws'
-      'version'
-    ]
