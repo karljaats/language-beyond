@@ -1,14 +1,16 @@
+@import "syntax-variables";
+
+// colors are theme dependent
 atom-text-editor.editor {
   .syntax--storage {
-    &.syntax--modifier.syntax--import {
-      color: blue;
-    }
-
     &.syntax--type {
-      color: orange;
+      color: hsl(28, 63%, 56%);
     }
   }
-  .syntax--keyword.syntax--operator.syntax--instanceof {
-    color: green;
+  .syntax--code_below.syntax--beyond , .syntax--delayed_code.syntax--beyond{
+    color: hsl(60, 70%, 49%);
+  }
+  .syntax--code.syntax--beyond{
+    color: hsl(122, 44%, 55%);
   }
 }

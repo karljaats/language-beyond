@@ -97,9 +97,6 @@
     ]
   }
   {
-    'include': '#comments-javadoc'
-  }
-  {
     'include': '#code'
   }
   {
@@ -117,37 +114,6 @@
       }
       {
         'include': '#object-types'
-      }
-    ]
-  'annotations':
-    'patterns': [
-      {
-        'begin': '((@)[^\\s(]+)(\\()'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.annotation.beyond'
-          '2':
-            'name': 'punctuation.definition.annotation.beyond'
-          '3':
-            'name': 'punctuation.definition.annotation-arguments.begin.bracket.round.beyond'
-        'end': '\\)'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.definition.annotation-arguments.end.bracket.round.beyond'
-        'name': 'meta.declaration.annotation.beyond'
-        'patterns': [
-          {
-            'captures':
-              '1':
-                'name': 'constant.other.key.beyond'
-              '2':
-                'name': 'keyword.operator.assignment.beyond'
-            'match': '(\\w*)\\s*(=)'
-          }
-          {
-            'include': '#code'
-          }
-        ]
       }
     ]
   'anonymous-block-and-instance-initializer':
@@ -258,9 +224,6 @@
   'class-body':
     'patterns': [
       {
-        'include': '#comments-javadoc'
-      }
-      {
         'include': '#comments'
       }
       {
@@ -276,9 +239,6 @@
         'include': '#methods'
       }
       {
-        'include': '#annotations'
-      }
-      {
         'include': '#member-variables'
       }
       {
@@ -290,9 +250,6 @@
     ]
   'code':
     'patterns': [
-      {
-        'include': '#annotations'
-      }
       {
         'include': '#comments'
       }
@@ -322,6 +279,10 @@
       }
       {
         'include': '#storage-modifiers'
+      }
+      {
+        'match': 'dagger|ctrl|fixed|ufixed'
+        'name': 'code.beyond'
       }
       {
         'include': '#method-call'
@@ -356,6 +317,10 @@
         'match': ';'
         'name': 'punctuation.terminator.beyond'
       }
+      {
+        'match': 'delayed_code'
+        'name': 'delayed_code.beyond'
+      }
     ]
   'comments':
     'patterns': [
@@ -365,9 +330,6 @@
             'name': 'punctuation.definition.comment.beyond'
         'match': '(/\\*\\*/)'
         'name': 'comment.block.empty.beyond'
-      }
-      {
-        'include': 'text.html.javadoc'
       }
       {
         'include': '#comments-inline'
@@ -400,42 +362,6 @@
           }
         ]
       }
-    ]
-  'comments-javadoc':
-    'patterns': [
-      'begin': '^\\s*(/\\*\\*)(?!/)'
-      'beginCaptures':
-        '1':
-          'name': 'punctuation.definition.comment.beyond'
-      'end': '\\*/'
-      'endCaptures':
-        '0':
-          'name': 'punctuation.definition.comment.beyond'
-      'name': 'comment.block.javadoc.beyond'
-      'patterns': [
-        {
-          'match': '@(author|deprecated|return|see|serial|since|version)\\b'
-          'name': 'keyword.other.documentation.javadoc.beyond'
-        }
-        {
-          'match': '(@param)\\s+(\\S+)'
-          'captures':
-            '1':
-              'name': 'keyword.other.documentation.javadoc.beyond'
-            '2':
-              'name': 'variable.parameter.beyond'
-        }
-        {
-          'match': '{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*}'
-          'captures':
-            '1':
-              'name': 'keyword.other.documentation.javadoc.beyond'
-            '2':
-              'name': 'entity.name.type.class.beyond'
-            '3':
-              'name': 'variable.parameter.beyond'
-        }
-      ]
     ]
   'constants-and-special-vars':
     'patterns': [
@@ -615,7 +541,7 @@
     ]
   'methods':
     'begin': '(?!new)(?=[\\w<].*\\s+)(?=([^=/]|/(?!/))+\\()'
-    'end': '(})|(?=;)'
+    'end': '(})|(?=;)' # |(?<=code_below;)
     'endCaptures':
       '1':
         'name': 'punctuation.section.method.end.bracket.curly.beyond'
@@ -678,7 +604,31 @@
         ]
       }
       {
+        'match' : 'code_below'
+        'name' : 'code_below.beyond'
+      }
+      {
+        'include' : '#compile_time_assert'
+      }
+      {
         'include': '#comments'
+      }
+    ]
+  'compile_time_assert':
+    'begin': '\\s*(compile_time_assert)\\s*(\\()'
+    'beginCaptures':
+      '1':
+        'name': 'code.beyond'#'entity.name.function.beyond'
+      '2':
+        'name': 'punctuation.definition.parameters.begin.bracket.round.beyond'
+    'end': '\\)'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.parameters.end.bracket.round.beyond'
+    'name': 'meta.method-call.beyond'
+    'patterns': [
+      {
+        'include': '#code'
       }
     ]
   'module':
@@ -862,9 +812,6 @@
       {
         'match': '\\bfinal\\b'
         'name': 'storage.modifier.beyond'
-      }
-      {
-        'include': '#annotations'
       }
       {
         'include': '#all-types'
