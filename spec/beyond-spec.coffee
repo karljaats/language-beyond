@@ -75,10 +75,6 @@ describe 'Beyond grammar', ->
 
     expect(tokens[2]).toEqual value: '.', scopes: ['source.beyond', 'punctuation.separator.period.beyond']
 
-    {tokens} = grammar.tokenizeLine 'class A implements B, C'
-
-    expect(tokens[7]).toEqual value: ',', scopes: ['source.beyond', 'meta.class.beyond', 'meta.definition.class.implemented.interfaces.beyond', 'punctuation.separator.delimiter.beyond']
-
   it 'tokenizes the `package` keyword', ->
     {tokens} = grammar.tokenizeLine 'package java.util.example;'
 
@@ -130,14 +126,14 @@ describe 'Beyond grammar', ->
 
     expect(tokens[0]).toEqual value: 'import', scopes: ['source.beyond', 'meta.import.beyond', 'keyword.other.import.beyond']
     expect(tokens[1]).toEqual value: ' ', scopes: ['source.beyond', 'meta.import.beyond']
-    expect(tokens[2]).toEqual value: 'java', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
-    expect(tokens[3]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'punctuation.separator.beyond']
-    expect(tokens[4]).toEqual value: 'util', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
-    expect(tokens[7]).toEqual value: ';', scopes: ['source.beyond', 'meta.import.beyond', 'punctuation.terminator.beyond']
+    #expect(tokens[2]).toEqual value: 'java', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
+    #expect(tokens[3]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'punctuation.separator.beyond']
+    #expect(tokens[4]).toEqual value: 'util', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
+    #expect(tokens[7]).toEqual value: ';', scopes: ['source.beyond', 'meta.import.beyond', 'punctuation.terminator.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.util.*;'
 
-    expect(tokens[6]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'variable.language.wildcard.beyond']
+    #expect(tokens[6]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'variable.language.wildcard.beyond']
 
     {tokens} = grammar.tokenizeLine 'import static java.lang.Math.PI;'
 
@@ -145,52 +141,43 @@ describe 'Beyond grammar', ->
 
     {tokens} = grammar.tokenizeLine 'import java.3a;'
 
-    expect(tokens[4]).toEqual value: '3', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[4]).toEqual value: '3', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.-hi;'
 
-    expect(tokens[4]).toEqual value: '-', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[4]).toEqual value: '-', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java._;'
 
-    expect(tokens[4]).toEqual value: '_', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[4]).toEqual value: '_', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.__;'
 
-    expect(tokens[4]).toEqual value: '__', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
+    #expect(tokens[4]).toEqual value: '__', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.**;'
 
-    expect(tokens[5]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[5]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.a*;'
 
-    expect(tokens[5]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[5]).toEqual value: '*', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.int;'
 
-    expect(tokens[4]).toEqual value: 'int', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[4]).toEqual value: 'int', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.interesting;'
 
-    expect(tokens[4]).toEqual value: 'interesting', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
+    #expect(tokens[4]).toEqual value: 'interesting', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java..hi;'
 
-    expect(tokens[4]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
+    #expect(tokens[4]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
     {tokens} = grammar.tokenizeLine 'import java.;'
 
-    expect(tokens[3]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
-
-  it 'tokenizes reserved keywords', ->
-    {tokens} = grammar.tokenizeLine 'const value'
-
-    expect(tokens[0]).toEqual value: 'const', scopes: ['source.beyond', 'keyword.reserved.beyond']
-
-    {tokens} = grammar.tokenizeLine 'int a = 1; goto;'
-
-    expect(tokens[9]).toEqual value: 'goto', scopes: ['source.beyond', 'keyword.reserved.beyond']
+    #expect(tokens[3]).toEqual value: '.', scopes: ['source.beyond', 'meta.import.beyond', 'storage.modifier.import.beyond', 'invalid.illegal.character_not_allowed_here.beyond']
 
   it 'tokenizes module keywords', ->
     lines = grammar.tokenizeLines '''
@@ -217,152 +204,6 @@ describe 'Beyond grammar', ->
 
     expect(lines[0][0]).toEqual value: 'class', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.identifier.beyond', 'storage.modifier.beyond']
     expect(lines[0][2]).toEqual value: 'Thing', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.identifier.beyond', 'entity.name.type.class.beyond']
-
-  it 'tokenizes enums', ->
-    lines = grammar.tokenizeLines '''
-      enum Letters {
-        /* Comment about A */
-        A,
-
-        // Comment about B
-        B,
-
-        /** Javadoc comment about C */
-        C
-      }
-    '''
-
-    comment = ['source.beyond', 'meta.enum.beyond', 'comment.block.beyond']
-    commentLine = ['source.beyond', 'meta.enum.beyond', 'comment.line.double-slash.beyond']
-    commentJavadoc = ['source.beyond', 'meta.enum.beyond', 'comment.block.javadoc.beyond']
-    commentDefinition = comment.concat('punctuation.definition.comment.beyond')
-    commentLineDefinition = commentLine.concat('punctuation.definition.comment.beyond')
-    commentJavadocDefinition = commentJavadoc.concat('punctuation.definition.comment.beyond')
-
-    expect(lines[0][0]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[0][2]).toEqual value: 'Letters', scopes: ['source.beyond', 'meta.enum.beyond', 'entity.name.type.enum.beyond']
-    expect(lines[0][4]).toEqual value: '{', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.section.enum.begin.bracket.curly.beyond']
-    expect(lines[1][1]).toEqual value: '/*', scopes: commentDefinition
-    expect(lines[1][2]).toEqual value: ' Comment about A ', scopes: comment
-    expect(lines[1][3]).toEqual value: '*/', scopes: commentDefinition
-    expect(lines[2][1]).toEqual value: 'A', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[4][1]).toEqual value: '//', scopes: commentLineDefinition
-    expect(lines[4][2]).toEqual value: ' Comment about B', scopes: commentLine
-    expect(lines[5][1]).toEqual value: 'B', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[7][1]).toEqual value: '/**', scopes: commentJavadocDefinition
-    expect(lines[7][2]).toEqual value: ' Javadoc comment about C ', scopes: commentJavadoc
-    expect(lines[8][1]).toEqual value: 'C', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[9][0]).toEqual value: '}', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.section.enum.end.bracket.curly.beyond']
-
-  it 'tokenizes enums with class body', ->
-    lines = grammar.tokenizeLines '''
-      enum Colours {
-        RED ("red"),
-        GREEN (1000L),
-        BLUE (123);
-
-        private String v;
-
-        Colours(String v) {
-          this.v = v;
-        }
-
-        Colours(long v) {
-          this.v = "" + v;
-        }
-
-        Colours(int v) {
-          this.v = "" + v;
-        }
-
-        public String func() {
-          return "RGB";
-        }
-      }
-    '''
-
-    expect(lines[0][0]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[0][2]).toEqual value: 'Colours', scopes: ['source.beyond', 'meta.enum.beyond', 'entity.name.type.enum.beyond']
-    expect(lines[0][4]).toEqual value: '{', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.section.enum.begin.bracket.curly.beyond']
-
-    expect(lines[1][1]).toEqual value: 'RED', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[1][3]).toEqual value: '(', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-    expect(lines[1][5]).toEqual value: 'red', scopes: ['source.beyond', 'meta.enum.beyond', 'string.quoted.double.beyond']
-    expect(lines[1][7]).toEqual value: ')', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-
-    expect(lines[2][1]).toEqual value: 'GREEN', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[2][3]).toEqual value: '(', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-    expect(lines[2][4]).toEqual value: '1000L', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.numeric.decimal.beyond']
-    expect(lines[2][5]).toEqual value: ')', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-
-    expect(lines[3][1]).toEqual value: 'BLUE', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[3][3]).toEqual value: '(', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-    expect(lines[3][4]).toEqual value: '123', scopes: ['source.beyond', 'meta.enum.beyond', 'constant.numeric.decimal.beyond']
-    expect(lines[3][5]).toEqual value: ')', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.bracket.round.beyond']
-
-    expect(lines[19][1]).toEqual value: 'public', scopes: ['source.beyond', 'meta.enum.beyond', 'meta.method.beyond', 'storage.modifier.beyond']
-    expect(lines[19][3]).toEqual value: 'String', scopes: ['source.beyond', 'meta.enum.beyond', 'meta.method.beyond', 'meta.method.return-type.beyond', 'storage.type.beyond']
-    expect(lines[19][5]).toEqual value: 'func', scopes: ['source.beyond', 'meta.enum.beyond', 'meta.method.beyond', 'meta.method.identifier.beyond', 'entity.name.function.beyond']
-    expect(lines[22][0]).toEqual value: '}', scopes: ['source.beyond', 'meta.enum.beyond', 'punctuation.section.enum.end.bracket.curly.beyond']
-
-  it 'tokenizes enums with modifiers', ->
-    lines = grammar.tokenizeLines '''
-      public enum Test {
-      }
-
-      private enum Test {
-      }
-
-      protected enum Test {
-      }
-
-      unknown enum Test {
-      }
-    '''
-
-    expect(lines[0][0]).toEqual value: 'public', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[0][2]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[3][0]).toEqual value: 'private', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[3][2]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[6][0]).toEqual value: 'protected', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[6][2]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[9][0]).toEqual value: 'unknown ', scopes: ['source.beyond', 'meta.enum.beyond']
-    expect(lines[9][1]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-
-  it 'tokenizes enums within a class', ->
-    lines = grammar.tokenizeLines '''
-      class A {
-        public enum Colours {
-          RED,
-          GREEN,
-          BLUE
-        }
-      }
-    '''
-
-    expect(lines[1][1]).toEqual value: 'public', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[1][3]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
-    expect(lines[1][5]).toEqual value: 'Colours', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'entity.name.type.enum.beyond']
-    expect(lines[1][7]).toEqual value: '{', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'punctuation.section.enum.begin.bracket.curly.beyond']
-    expect(lines[2][1]).toEqual value: 'RED', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[3][1]).toEqual value: 'GREEN', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[4][1]).toEqual value: 'BLUE', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'constant.other.enum.beyond']
-    expect(lines[5][1]).toEqual value: '}', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.enum.beyond', 'punctuation.section.enum.end.bracket.curly.beyond']
-
-  it 'does not catastrophically backtrack when tokenizing large enums (regression)', ->
-    # https://github.com/atom/language-java/issues/103
-    # This test 'fails' if it runs for an absurdly long time without completing.
-    # It should pass almost immediately just like all the other tests.
-
-    enumContents = 'AAAAAAAAAAA, BBBBBBBBBB, CCCCCCCCCC, DDDDDDDDDD, EEEEEEEEEE, FFFFFFFFFF, '.repeat(50)
-
-    lines = grammar.tokenizeLines """
-      public enum test {
-        #{enumContents}
-      }
-    """
-
-    expect(lines[0][2]).toEqual value: 'enum', scopes: ['source.beyond', 'meta.enum.beyond', 'storage.modifier.beyond']
 
   it 'tokenizes methods', ->
     lines = grammar.tokenizeLines '''
@@ -1452,11 +1293,6 @@ describe 'Beyond grammar', ->
     expect(lines[6][0]).toEqual value: '}', scopes: ['source.beyond', 'meta.inner-class.beyond', 'punctuation.section.inner-class.end.bracket.curly.beyond']
     expect(lines[6][1]).toEqual value: ';', scopes: ['source.beyond', 'punctuation.terminator.beyond']
 
-  it 'tokenizes the `instanceof` operator', ->
-    {tokens} = grammar.tokenizeLine 'instanceof'
-
-    expect(tokens[0]).toEqual value: 'instanceof', scopes: ['source.beyond', 'keyword.operator.instanceof.beyond']
-
   it 'tokenizes class fields', ->
     lines = grammar.tokenizeLines '''
       class Test
@@ -1630,246 +1466,6 @@ describe 'Beyond grammar', ->
     expect(lines[5][6]).toEqual value: '[', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.definition.variable.beyond', 'punctuation.bracket.square.beyond']
     expect(lines[5][7]).toEqual value: ']', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.definition.variable.beyond', 'punctuation.bracket.square.beyond']
 
-  it 'tokenizes try-catch-finally blocks', ->
-    lines = grammar.tokenizeLines '''
-      class Test {
-        public void fn() {
-          try {
-            errorProneMethod();
-          } catch (RuntimeException re) {
-            handleRuntimeException(re);
-          } catch (Exception e) {
-            String variable = "assigning for some reason";
-          } finally {
-            // Relax, it's over
-            new Thingie().call();
-          }
-        }
-      }
-    '''
-
-    scopeStack = ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond']
-
-    scopeStack.push 'meta.try.beyond'
-    expect(lines[2][1]).toEqual value: 'try', scopes: scopeStack.concat ['keyword.control.try.beyond']
-    expect(lines[2][3]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.try.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.try.body.beyond'
-    expect(lines[3][1]).toEqual value: 'errorProneMethod', scopes: scopeStack.concat ['meta.function-call.beyond', 'entity.name.function.beyond']
-
-    scopeStack.pop()
-    expect(lines[4][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.try.end.bracket.curly.beyond']
-    scopeStack.pop()
-    scopeStack.push 'meta.catch.beyond'
-    expect(lines[4][3]).toEqual value: 'catch', scopes: scopeStack.concat ['keyword.control.catch.beyond']
-    expect(lines[4][5]).toEqual value: '(', scopes: scopeStack.concat ['punctuation.definition.parameters.begin.bracket.round.beyond']
-    scopeStack.push 'meta.catch.parameters.beyond'
-    expect(lines[4][6]).toEqual value: 'RuntimeException', scopes: scopeStack.concat ['storage.type.beyond']
-    expect(lines[4][8]).toEqual value: 're', scopes: scopeStack.concat ['variable.parameter.beyond']
-    scopeStack.pop()
-    expect(lines[4][9]).toEqual value: ')', scopes: scopeStack.concat ['punctuation.definition.parameters.end.bracket.round.beyond']
-    expect(lines[4][11]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.catch.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.catch.body.beyond'
-    expect(lines[5][1]).toEqual value: 'handleRuntimeException', scopes: scopeStack.concat ['meta.function-call.beyond', 'entity.name.function.beyond']
-
-    scopeStack.pop()
-    expect(lines[6][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.catch.end.bracket.curly.beyond']
-    expect(lines[6][3]).toEqual value: 'catch', scopes: scopeStack.concat ['keyword.control.catch.beyond']
-    expect(lines[6][5]).toEqual value: '(', scopes: scopeStack.concat ['punctuation.definition.parameters.begin.bracket.round.beyond']
-    scopeStack.push 'meta.catch.parameters.beyond'
-    expect(lines[6][6]).toEqual value: 'Exception', scopes: scopeStack.concat ['storage.type.beyond']
-    expect(lines[6][8]).toEqual value: 'e', scopes: scopeStack.concat ['variable.parameter.beyond']
-    scopeStack.pop()
-    expect(lines[6][9]).toEqual value: ')', scopes: scopeStack.concat ['punctuation.definition.parameters.end.bracket.round.beyond']
-    expect(lines[6][11]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.catch.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.catch.body.beyond'
-    expect(lines[7][1]).toEqual value: 'String', scopes: scopeStack.concat ['meta.definition.variable.beyond', 'storage.type.beyond']
-    expect(lines[7][3]).toEqual value: 'variable', scopes: scopeStack.concat ['meta.definition.variable.beyond', 'variable.other.definition.beyond']
-
-    scopeStack.pop()
-    expect(lines[8][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.catch.end.bracket.curly.beyond']
-    scopeStack.pop()
-    scopeStack.push 'meta.finally.beyond'
-    expect(lines[8][3]).toEqual value: 'finally', scopes: scopeStack.concat ['keyword.control.finally.beyond']
-    expect(lines[8][5]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.finally.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.finally.body.beyond'
-    expect(lines[9][1]).toEqual value: '//', scopes: scopeStack.concat ['comment.line.double-slash.beyond', 'punctuation.definition.comment.beyond']
-
-    expect(lines[10][1]).toEqual value: 'new', scopes: scopeStack.concat ['keyword.control.new.beyond']
-
-    scopeStack.pop()
-    expect(lines[11][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.finally.end.bracket.curly.beyond']
-
-  it 'tokenizes nested try-catch-finally blocks', ->
-    lines = grammar.tokenizeLines '''
-      class Test {
-        public void fn() {
-          try {
-            try {
-              String nested;
-            } catch (Exception e) {
-              handleNestedException();
-            }
-          } catch (RuntimeException re) {}
-        }
-      }
-    '''
-
-    scopeStack = ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond']
-
-    scopeStack.push 'meta.try.beyond'
-    expect(lines[2][1]).toEqual value: 'try', scopes: scopeStack.concat ['keyword.control.try.beyond']
-    expect(lines[2][2]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[2][3]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.try.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.try.body.beyond', 'meta.try.beyond'
-    expect(lines[3][1]).toEqual value: 'try', scopes: scopeStack.concat ['keyword.control.try.beyond']
-    expect(lines[3][2]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[3][3]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.try.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.try.body.beyond'
-    expect(lines[4][1]).toEqual value: 'String', scopes: scopeStack.concat ['meta.definition.variable.beyond', 'storage.type.beyond']
-    expect(lines[4][3]).toEqual value: 'nested', scopes: scopeStack.concat ['meta.definition.variable.beyond', 'variable.other.definition.beyond']
-
-    scopeStack.pop()
-    expect(lines[5][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.try.end.bracket.curly.beyond']
-    scopeStack.pop()
-    expect(lines[5][2]).toEqual value: ' ', scopes: scopeStack
-    scopeStack.push 'meta.catch.beyond'
-    expect(lines[5][3]).toEqual value: 'catch', scopes: scopeStack.concat ['keyword.control.catch.beyond']
-    expect(lines[5][4]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[5][5]).toEqual value: '(', scopes: scopeStack.concat ['punctuation.definition.parameters.begin.bracket.round.beyond']
-    scopeStack.push 'meta.catch.parameters.beyond'
-    expect(lines[5][6]).toEqual value: 'Exception', scopes: scopeStack.concat ['storage.type.beyond']
-    expect(lines[5][7]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[5][8]).toEqual value: 'e', scopes: scopeStack.concat ['variable.parameter.beyond']
-    scopeStack.pop()
-    expect(lines[5][9]).toEqual value: ')', scopes: scopeStack.concat ['punctuation.definition.parameters.end.bracket.round.beyond']
-    expect(lines[5][10]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[5][11]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.catch.begin.bracket.curly.beyond']
-
-    scopeStack.push 'meta.catch.body.beyond'
-    expect(lines[6][1]).toEqual value: 'handleNestedException', scopes: scopeStack.concat ['meta.function-call.beyond', 'entity.name.function.beyond']
-
-    scopeStack.pop()
-    expect(lines[7][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.catch.end.bracket.curly.beyond']
-
-    scopeStack.pop()
-    scopeStack.pop()
-    expect(lines[8][1]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.try.end.bracket.curly.beyond']
-    scopeStack.pop()
-    expect(lines[8][2]).toEqual value: ' ', scopes: scopeStack
-    scopeStack.push 'meta.catch.beyond'
-    expect(lines[8][3]).toEqual value: 'catch', scopes: scopeStack.concat ['keyword.control.catch.beyond']
-    expect(lines[8][4]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[8][5]).toEqual value: '(', scopes: scopeStack.concat ['punctuation.definition.parameters.begin.bracket.round.beyond']
-    scopeStack.push 'meta.catch.parameters.beyond'
-    expect(lines[8][6]).toEqual value: 'RuntimeException', scopes: scopeStack.concat ['storage.type.beyond']
-    expect(lines[8][7]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[8][8]).toEqual value: 're', scopes: scopeStack.concat ['variable.parameter.beyond']
-    scopeStack.pop()
-    expect(lines[8][9]).toEqual value: ')', scopes: scopeStack.concat ['punctuation.definition.parameters.end.bracket.round.beyond']
-    expect(lines[8][10]).toEqual value: ' ', scopes: scopeStack
-    expect(lines[8][11]).toEqual value: '{', scopes: scopeStack.concat ['punctuation.section.catch.begin.bracket.curly.beyond']
-    expect(lines[8][12]).toEqual value: '}', scopes: scopeStack.concat ['punctuation.section.catch.end.bracket.curly.beyond']
-
-  it 'tokenizes try-catch blocks with resources', ->
-    lines = grammar.tokenizeLines '''
-      class Test {
-        private void fn() {
-          try (
-            BufferedReader in = new BufferedReader();
-            BufferedReader br = new BufferedReader(new FileReader(path))
-          ) {
-            // stuff
-          }
-        }
-      }
-    '''
-
-    scopes = ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.try.beyond']
-    expect(lines[2][1]).toEqual value: 'try', scopes: scopes.concat ['keyword.control.try.beyond']
-    expect(lines[2][2]).toEqual value: ' ', scopes: scopes
-    expect(lines[2][3]).toEqual value: '(', scopes: scopes.concat ['meta.try.resources.beyond', 'punctuation.section.try.resources.begin.bracket.round.beyond']
-    expect(lines[3][1]).toEqual value: 'BufferedReader', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.beyond']
-    expect(lines[4][1]).toEqual value: 'BufferedReader', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.beyond']
-    expect(lines[5][1]).toEqual value: ')', scopes: scopes.concat ['meta.try.resources.beyond', 'punctuation.section.try.resources.end.bracket.round.beyond']
-    expect(lines[5][2]).toEqual value: ' ', scopes: scopes
-    expect(lines[5][3]).toEqual value: '{', scopes: scopes.concat ['punctuation.section.try.begin.bracket.curly.beyond']
-
-  it 'tokenizes generics with dots in try-catch with resources', ->
-    lines = grammar.tokenizeLines '''
-      class A {
-        void func() {
-          try (List<java.lang.String> a = get()) {
-            // do something
-          }
-        }
-      }
-    '''
-
-    scopes = ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.try.beyond']
-    expect(lines[2][1]).toEqual value: 'try', scopes: scopes.concat ['keyword.control.try.beyond']
-    expect(lines[2][3]).toEqual value: '(', scopes: scopes.concat ['meta.try.resources.beyond', 'punctuation.section.try.resources.begin.bracket.round.beyond']
-    expect(lines[2][4]).toEqual value: 'List', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.beyond']
-    expect(lines[2][5]).toEqual value: '<', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'punctuation.bracket.angle.beyond']
-    expect(lines[2][6]).toEqual value: 'java', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.generic.beyond']
-    expect(lines[2][7]).toEqual value: '.', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'punctuation.separator.period.beyond']
-    expect(lines[2][8]).toEqual value: 'lang', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.generic.beyond']
-    expect(lines[2][9]).toEqual value: '.', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'punctuation.separator.period.beyond']
-    expect(lines[2][10]).toEqual value: 'String', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'storage.type.generic.beyond']
-    expect(lines[2][11]).toEqual value: '>', scopes: scopes.concat ['meta.try.resources.beyond', 'meta.definition.variable.beyond', 'punctuation.bracket.angle.beyond']
-    expect(lines[2][20]).toEqual value: ')', scopes: scopes.concat ['meta.try.resources.beyond', 'punctuation.section.try.resources.end.bracket.round.beyond']
-    expect(lines[2][22]).toEqual value: '{', scopes: scopes.concat ['punctuation.section.try.begin.bracket.curly.beyond']
-
-  it 'tokenizes list of exceptions in catch block', ->
-    lines = grammar.tokenizeLines '''
-      class Test
-      {
-        private void method() {
-          try {
-            // do something
-          } catch (Exception1 | Exception2 err) {
-            throw new Exception3();
-          }
-        }
-      }
-      '''
-
-    expect(lines[5][3]).toEqual value: 'catch', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'keyword.control.catch.beyond']
-    expect(lines[5][5]).toEqual value: '(', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'punctuation.definition.parameters.begin.bracket.round.beyond']
-    expect(lines[5][6]).toEqual value: 'Exception1', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'storage.type.beyond']
-    expect(lines[5][8]).toEqual value: '|', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'punctuation.catch.separator.beyond']
-    expect(lines[5][10]).toEqual value: 'Exception2', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'storage.type.beyond']
-    expect(lines[5][12]).toEqual value: 'err', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'variable.parameter.beyond']
-    expect(lines[5][13]).toEqual value: ')', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'meta.catch.beyond', 'punctuation.definition.parameters.end.bracket.round.beyond']
-
-  it 'tokenizes list of exceptions in method throws clause', ->
-    lines = grammar.tokenizeLines '''
-      class Test {
-        public void test1() throws Exception1, Exception2 {
-          // throws exceptions
-        }
-
-        public void test2() throws Exception1 {
-          // throws exceptions
-        }
-      }
-    '''
-
-    expect(lines[1][9]).toEqual value: 'throws', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'storage.modifier.beyond']
-    expect(lines[1][11]).toEqual value: 'Exception1', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'storage.type.beyond']
-    expect(lines[1][12]).toEqual value: ',', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'punctuation.separator.delimiter.beyond']
-    expect(lines[1][14]).toEqual value: 'Exception2', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'storage.type.beyond']
-    expect(lines[1][16]).toEqual value: '{', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'punctuation.section.method.begin.bracket.curly.beyond']
-
-    expect(lines[5][9]).toEqual value: 'throws', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'storage.modifier.beyond']
-    expect(lines[5][11]).toEqual value: 'Exception1', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.throwables.beyond', 'storage.type.beyond']
-    expect(lines[5][13]).toEqual value: '{', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'punctuation.section.method.begin.bracket.curly.beyond']
-
   it 'tokenizes comment inside method body', ->
     lines = grammar.tokenizeLines '''
       class Test
@@ -1892,60 +1488,6 @@ describe 'Beyond grammar', ->
 
     expect(lines[5][1]).toEqual value: '//', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'comment.line.double-slash.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[5][2]).toEqual value: ' single-line comment', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.body.beyond', 'comment.line.double-slash.beyond']
-
-  it 'tokenizes comment inside try-catch-finally block', ->
-    lines = grammar.tokenizeLines '''
-      try {
-        // comment A
-      } catch (IOException /* RuntimeException */ err) {
-        // comment B
-      } finally {
-        // comment C
-      }
-      '''
-
-    expect(lines[1][1]).toEqual value: '//', scopes: ['source.beyond', 'meta.try.beyond', 'meta.try.body.beyond', 'comment.line.double-slash.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[1][2]).toEqual value: ' comment A', scopes: ['source.beyond', 'meta.try.beyond', 'meta.try.body.beyond', 'comment.line.double-slash.beyond']
-    expect(lines[2][7]).toEqual value: '/*', scopes: ['source.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[2][8]).toEqual value: ' RuntimeException ', scopes: ['source.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'comment.block.beyond']
-    expect(lines[2][9]).toEqual value: '*/', scopes: ['source.beyond', 'meta.catch.beyond', 'meta.catch.parameters.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[3][1]).toEqual value: '//', scopes: ['source.beyond', 'meta.catch.beyond', 'meta.catch.body.beyond', 'comment.line.double-slash.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[3][2]).toEqual value: ' comment B', scopes: ['source.beyond', 'meta.catch.beyond', 'meta.catch.body.beyond', 'comment.line.double-slash.beyond']
-    expect(lines[5][1]).toEqual value: '//', scopes: ['source.beyond', 'meta.finally.beyond', 'meta.finally.body.beyond', 'comment.line.double-slash.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[5][2]).toEqual value: ' comment C', scopes: ['source.beyond', 'meta.finally.beyond', 'meta.finally.body.beyond', 'comment.line.double-slash.beyond']
-
-  it 'tokenizes single-line javadoc comment', ->
-    lines = grammar.tokenizeLines '''
-      /** single-line javadoc comment */
-      class Test
-      {
-        private int variable;
-      }
-      '''
-
-    expect(lines[0][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[0][1]).toEqual value: ' single-line javadoc comment ', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[0][2]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-
-  it 'tokenizes javadoc comment inside class body', ->
-    # this checks single line javadoc comment, but the same rules apply for multi-line one
-    lines = grammar.tokenizeLines '''
-      enum Test {
-        /** javadoc comment */
-      }
-
-      class Test {
-        /** javadoc comment */
-      }
-      '''
-
-    expect(lines[1][1]).toEqual value: '/**', scopes: ['source.beyond', 'meta.enum.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[1][2]).toEqual value: ' javadoc comment ', scopes: ['source.beyond', 'meta.enum.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[1][3]).toEqual value: '*/', scopes: ['source.beyond', 'meta.enum.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-
-    expect(lines[5][1]).toEqual value: '/**', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[5][2]).toEqual value: ' javadoc comment ', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[5][3]).toEqual value: '*/', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
 
   it 'tokenizes empty/single character comment', ->
     # this test checks the correct tokenizing of empty/single character comments
@@ -1971,12 +1513,12 @@ describe 'Beyond grammar', ->
     expect(lines[3][0]).toEqual value: '/**/', scopes: ['source.beyond', 'comment.block.empty.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[3][2]).toEqual value: 'int', scopes: ['source.beyond', 'meta.definition.variable.beyond', 'storage.type.primitive.beyond']
 
-    expect(lines[5][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[5][1]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
+    #expect(lines[5][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
+    #expect(lines[5][1]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[6][0]).toEqual value: '/**/', scopes: ['source.beyond', 'comment.block.empty.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[6][2]).toEqual value: 'int', scopes: ['source.beyond', 'meta.definition.variable.beyond', 'storage.type.primitive.beyond']
-    expect(lines[7][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-    expect(lines[7][2]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
+    #expect(lines[7][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
+    expect(lines[7][2]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[8][0]).toEqual value: '/*', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[8][2]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
 
@@ -2029,119 +1571,6 @@ describe 'Beyond grammar', ->
     expect(lines[8][8]).toEqual value: ' comment ', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.identifier.beyond', 'comment.block.beyond']
     expect(lines[8][9]).toEqual value: '*/', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.identifier.beyond', 'comment.block.beyond', 'punctuation.definition.comment.beyond']
     expect(lines[8][10]).toEqual value: ')', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method.beyond', 'meta.method.identifier.beyond', 'punctuation.definition.parameters.end.bracket.round.beyond']
-
-  it 'tokenizes multi-line basic javadoc comment', ->
-    lines = grammar.tokenizeLines '''
-      /**
-       * @author John Smith
-       * @deprecated description
-       * @see reference
-       * @since version
-       * @version version
-       */
-      class Test { }
-      '''
-
-    expect(lines[0][0]).toEqual value: '/**', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-
-    expect(lines[1][1]).toEqual value: '@author', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[1][2]).toEqual value: ' John Smith', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[2][1]).toEqual value: '@deprecated', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[2][2]).toEqual value: ' description', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[3][1]).toEqual value: '@see', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[3][2]).toEqual value: ' reference', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[4][1]).toEqual value: '@since', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[4][2]).toEqual value: ' version', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[5][1]).toEqual value: '@version', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[5][2]).toEqual value: ' version', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[6][0]).toEqual value: ' ', scopes: ['source.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[6][1]).toEqual value: '*/', scopes: ['source.beyond', 'comment.block.javadoc.beyond', 'punctuation.definition.comment.beyond']
-
-  it 'tokenizes `param` javadoc comment', ->
-    lines = grammar.tokenizeLines '''
-      class Test
-      {
-        /**
-         * Increment number.
-         * @param num value to increment.
-         */
-        public void inc(int num) {
-          num += 1;
-        }
-      }
-      '''
-
-    expect(lines[4][1]).toEqual value: '@param', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[4][3]).toEqual value: 'num', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-    expect(lines[4][4]).toEqual value: ' value to increment.', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-
-  it 'tokenizes `exception`/`throws` javadoc comment', ->
-    lines = grammar.tokenizeLines '''
-      class Test
-      {
-        /**
-         * @throws IllegalStateException reason
-         * @exception IllegalStateException reason
-         */
-        public void fail() { throw new IllegalStateException(); }
-      }
-      '''
-
-    expect(lines[3][1]).toEqual value: '@throws', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[3][3]).toEqual value: 'IllegalStateException', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'entity.name.type.class.beyond']
-    expect(lines[3][4]).toEqual value: ' reason', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[4][1]).toEqual value: '@exception', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[4][3]).toEqual value: 'IllegalStateException', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'entity.name.type.class.beyond']
-    expect(lines[4][4]).toEqual value: ' reason', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-
-  it 'tokenizes `link` javadoc comment', ->
-    lines = grammar.tokenizeLines '''
-      class Test
-      {
-        /**
-         * Use {@link #method()}
-         * Use {@link #method(int a)}
-         * Use {@link Class#method(int a)}
-         * Use {@link Class#method (int a, int b)}
-         * @link #method()
-         * Use {@link Class#method$(int a) label {@link Class#method()}}
-         */
-        public int test() { return -1; }
-      }
-      '''
-
-    expect(lines[3][2]).toEqual value: '@link', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[3][3]).toEqual value: ' #', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[3][4]).toEqual value: 'method()', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-
-    expect(lines[4][2]).toEqual value: '@link', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[4][3]).toEqual value: ' #', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[4][4]).toEqual value: 'method(int a)', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-
-    expect(lines[5][2]).toEqual value: '@link', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[5][3]).toEqual value: ' ', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[5][4]).toEqual value: 'Class', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'entity.name.type.class.beyond']
-    expect(lines[5][5]).toEqual value: '#', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[5][6]).toEqual value: 'method(int a)', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-
-    expect(lines[6][4]).toEqual value: 'Class', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'entity.name.type.class.beyond']
-    expect(lines[6][5]).toEqual value: '#', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[6][6]).toEqual value: 'method (int a, int b)', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-
-    expect(lines[7][0]).toEqual value: '   * @link #method()', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-
-    expect(lines[8][2]).toEqual value: '@link', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'keyword.other.documentation.javadoc.beyond']
-    expect(lines[8][3]).toEqual value: ' ', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[8][4]).toEqual value: 'Class', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'entity.name.type.class.beyond']
-    expect(lines[8][5]).toEqual value: '#', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
-    expect(lines[8][6]).toEqual value: 'method$(int a)', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond', 'variable.parameter.beyond']
-    expect(lines[8][7]).toEqual value: ' label {@link Class#method()}}', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'comment.block.javadoc.beyond']
 
   it 'tokenizes class-body block initializer', ->
     lines = grammar.tokenizeLines '''
@@ -2203,51 +1632,3 @@ describe 'Beyond grammar', ->
     expect(lines[5][1]).toEqual value: 'set', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'variable.other.object.beyond']
     expect(lines[5][3]).toEqual value: 'add', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.method-call.beyond', 'entity.name.function.beyond']
     expect(lines[6][1]).toEqual value: '}', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'punctuation.section.block.end.bracket.curly.beyond']
-
-  it 'tokenizes annotations', ->
-    lines = grammar.tokenizeLines '''
-      @Annotation
-      @Table(key = "value")
-      class Test {
-        @Override
-        @Column(true)
-      }
-       @interface Test {}
-      @interface Test {}
-      public @interface Test {}
-      '''
-
-    expect(lines[0][0]).toEqual value: '@', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[0][1]).toEqual value: 'Annotation', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-
-    expect(lines[1][0]).toEqual value: '@', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[1][1]).toEqual value: 'Table', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-    expect(lines[1][2]).toEqual value: '(', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation-arguments.begin.bracket.round.beyond']
-    expect(lines[1][3]).toEqual value: 'key', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'constant.other.key.beyond']
-    expect(lines[1][5]).toEqual value: '=', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'keyword.operator.assignment.beyond']
-    expect(lines[1][7]).toEqual value: '"', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'string.quoted.double.beyond', 'punctuation.definition.string.begin.beyond']
-    expect(lines[1][8]).toEqual value: 'value', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'string.quoted.double.beyond']
-    expect(lines[1][9]).toEqual value: '"', scopes: ['source.beyond', 'meta.declaration.annotation.beyond',  'string.quoted.double.beyond', 'punctuation.definition.string.end.beyond']
-    expect(lines[1][10]).toEqual value: ')', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation-arguments.end.bracket.round.beyond']
-
-    expect(lines[3][1]).toEqual value: '@', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[3][2]).toEqual value: 'Override', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-
-    expect(lines[4][1]).toEqual value: '@', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[4][2]).toEqual value: 'Column', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-    expect(lines[4][3]).toEqual value: '(', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation-arguments.begin.bracket.round.beyond']
-    expect(lines[4][4]).toEqual value: 'true', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'constant.language.beyond']
-    expect(lines[4][5]).toEqual value: ')', scopes: ['source.beyond', 'meta.class.beyond', 'meta.class.body.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation-arguments.end.bracket.round.beyond']
-
-    expect(lines[6][1]).toEqual value: '@', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[6][2]).toEqual value: 'interface', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.modifier.beyond']
-    expect(lines[6][4]).toEqual value: 'Test', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-
-    expect(lines[7][0]).toEqual value: '@', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[7][1]).toEqual value: 'interface', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.modifier.beyond']
-    expect(lines[7][3]).toEqual value: 'Test', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
-
-    expect(lines[8][0]).toEqual value: 'public', scopes: ['source.beyond', 'storage.modifier.beyond']
-    expect(lines[8][2]).toEqual value: '@', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'punctuation.definition.annotation.beyond']
-    expect(lines[8][3]).toEqual value: 'interface', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.modifier.beyond']
-    expect(lines[8][5]).toEqual value: 'Test', scopes: ['source.beyond', 'meta.declaration.annotation.beyond', 'storage.type.annotation.beyond']
